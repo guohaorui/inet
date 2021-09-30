@@ -20,20 +20,20 @@
 
 /showcases/mobility/basic/,          -f omnetpp.ini -c LinearMobility -r 0,         100s,         1211-c17f/tplx;0000-0000/~tNl;0000-0000/~tND;497e-9125/tyf, PASS,
 /showcases/mobility/basic/,          -f omnetpp.ini -c CircleMobility -r 0,         100s,         6226-0ee5/tplx;0000-0000/~tNl;0000-0000/~tND;4630-5dfc/tyf, PASS,
-/showcases/mobility/basic/,          -f omnetpp.ini -c TurtleMobility -r 0,         100s,         bab2-85af/tplx;0000-0000/~tNl;0000-0000/~tND;73bf-7dcf/tyf, PASS,
+/showcases/mobility/basic/,          -f omnetpp.ini -c TurtleMobility -r 0,         100s,         bab2-85af/tplx;0000-0000/~tNl;0000-0000/~tND;bb19-2a7f/tyf, PASS,
 /showcases/mobility/basic/,          -f omnetpp.ini -c FacingMobility -r 0,         100s,         1fca-7a6f/tplx;0000-0000/~tNl;0000-0000/~tND;b309-64c3/tyf, PASS,
-/showcases/mobility/basic/,          -f omnetpp.ini -c GaussMarkovMobility -r 0,    100s,         1211-c17f/tplx;0000-0000/~tNl;0000-0000/~tND;2bbf-4d43/tyf, PASS,
+/showcases/mobility/basic/,          -f omnetpp.ini -c GaussMarkovMobility -r 0,    100s,         1211-c17f/tplx;0000-0000/~tNl;0000-0000/~tND;8009-d8c9/tyf, PASS,
 /showcases/mobility/basic/,          -f omnetpp.ini -c StaticGridMobility -r 0,     100s,         0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND;3303-ad79/tyf, PASS,
 /showcases/mobility/basic/,          -f omnetpp.ini -c StationaryMobility -r 0,     100s,         0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND;0000-0000/tyf, PASS,
-/showcases/mobility/basic/,          -f omnetpp.ini -c BonnMotionMobility -r 0,     100s,         22bd-a72c/tplx;0000-0000/~tNl;0000-0000/~tND;fce4-5ae9/tyf, PASS,
+/showcases/mobility/basic/,          -f omnetpp.ini -c BonnMotionMobility -r 0,     100s,         22bd-a72c/tplx;0000-0000/~tNl;0000-0000/~tND;2272-672f/tyf, PASS,
 /showcases/mobility/combining/,      -f omnetpp.ini -c Attached1 -r 0,              100s,         1fca-7a6f/tplx;0000-0000/~tNl;0000-0000/~tND;d0b9-9a8d/tyf, PASS,
 /showcases/mobility/combining/,      -f omnetpp.ini -c Attached2 -r 0,              100s,         1fca-7a6f/tplx;0000-0000/~tNl;0000-0000/~tND;1a6b-13f8/tyf, PASS,
-/showcases/mobility/combining/,      -f omnetpp.ini -c Superpositioning1 -r 0,      100s,         1380-5e68/tplx;0000-0000/~tNl;0000-0000/~tND;9882-b558/tyf, PASS,
-/showcases/mobility/combining/,      -f omnetpp.ini -c Superpositioning2 -r 0,      100s,         37d4-b1ec/tplx;0000-0000/~tNl;0000-0000/~tND;4d87-8af1/tyf, PASS,
+/showcases/mobility/combining/,      -f omnetpp.ini -c Superpositioning1 -r 0,      100s,         1380-5e68/tplx;0000-0000/~tNl;0000-0000/~tND;a1a2-cb94/tyf, PASS,
+/showcases/mobility/combining/,      -f omnetpp.ini -c Superpositioning2 -r 0,      100s,         37d4-b1ec/tplx;0000-0000/~tNl;0000-0000/~tND;aba9-c000/tyf, PASS,
 /showcases/mobility/combining/,      -f omnetpp.ini -c AntennaOrientation -r 0,     100s,         8b9e-18a2/tplx;0000-0000/~tNl;0000-0000/~tND;cbca-ae3b/tyf, PASS,
 /showcases/mobility/combining/,      -f omnetpp.ini -c Attached3D -r 0,             100s,         37d4-b1ec/tplx;0000-0000/~tNl;0000-0000/~tND;b760-36fa/tyf, PASS,
 /showcases/mobility/spatial/,        -f omnetpp.ini -c Spiral -r 0,                 100s,         1380-5e68/tplx;0000-0000/~tNl;0000-0000/~tND;31a9-9fed/tyf, PASS,
-/showcases/mobility/spatial/,        -f omnetpp.ini -c Drone -r 0,                  100s,         a626-644b/tplx;0000-0000/~tNl;0000-0000/~tND;4e12-2cf3/tyf, PASS,
+/showcases/mobility/spatial/,        -f omnetpp.ini -c Drone -r 0,                  100s,         a626-644b/tplx;0000-0000/~tNl;0000-0000/~tND;3b39-27ea/tyf, PASS,
 
 # /showcases/routing/manet/,           -f omnetpp.ini -c MobileNodesBase -r 0,        100s,         0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND, PASS,   # MobileNodesBase extended
 /showcases/routing/manet/,           -f omnetpp.ini -c Aodv -r 0,                   100s,         d4f1-1c35/tplx;c268-fae7/~tNl;0d5b-c7a9/~tND;e74e-6ba9/tyf, PASS,    wireless
@@ -70,7 +70,7 @@
 /showcases/visualizer/canvas/interfacetable/, -f omnetpp.ini -c EnablingVisualization -r 0,                  5s,            0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND;0000-0000/tyf, PASS,
 /showcases/visualizer/canvas/interfacetable/, -f omnetpp.ini -c AdvancedFeatures -r 0,                       5s,            cfa7-ed6a/tplx;63d2-2fb5/~tNl;8685-c7be/~tND;0317-f8e6/tyf, PASS,    wireless
 
-/showcases/visualizer/canvas/mobility/,     -f omnetpp.ini -c VisualizingFeatures -r 0,                                500s,            54a1-0f8d/tplx;0000-0000/~tNl;0000-0000/~tND;5b39-ede4/tyf, PASS,    wireless
+/showcases/visualizer/canvas/mobility/,     -f omnetpp.ini -c VisualizingFeatures -r 0,                                500s,            54a1-0f8d/tplx;0000-0000/~tNl;0000-0000/~tND;9a46-1dc4/tyf, PASS,    wireless
 
 /showcases/visualizer/osg/networknode/,  -f omnetpp.ini -c Canvas -r 0,                 1s,         0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND;0000-0000/tyf, PASS,
 /showcases/visualizer/osg/networknode/,  -f omnetpp.ini -c Basic3D -r 0,                1s,         0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND;0000-0000/tyf, PASS,
@@ -88,15 +88,15 @@
 
 # /showcases/visualizer/osg/osgdemo/,      -f omnetpp.ini -c General -r 0,                100s,         0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND, ERROR,
 
-/showcases/visualizer/canvas/packetdrop/,   -f omnetpp.ini -c QueueOverflow -r 0,                                      2002ms,            28fa-a3b8/tplx;b7e8-1b57/~tNl;b4fc-c0f1/~tND;a2bd-22ee/tyf, PASS,    wireless
+/showcases/visualizer/canvas/packetdrop/,   -f omnetpp.ini -c QueueOverflow -r 0,                                      2002ms,            28fa-a3b8/tplx;b7e8-1b57/~tNl;b4fc-c0f1/~tND;5ddc-cee7/tyf, PASS,    wireless
 /showcases/visualizer/canvas/packetdrop/,   -f omnetpp.ini -c ArpResolutionFailed -r 0,                                500s,            9069-cca6/tplx;0000-0000/~tNl;0000-0000/~tND;5d58-540c/tyf, PASS,    wireless
-/showcases/visualizer/canvas/packetdrop/,   -f omnetpp.ini -c MACRetryLimitReached -r 0,                               500s,            1f7a-e5f3/tplx;14cf-73d2/~tNl;c5f5-7ea6/~tND;3cba-cbc6/tyf, PASS,    wireless
+/showcases/visualizer/canvas/packetdrop/,   -f omnetpp.ini -c MACRetryLimitReached -r 0,                               500s,            1f7a-e5f3/tplx;14cf-73d2/~tNl;c5f5-7ea6/~tND;a56e-92bc/tyf, PASS,    wireless
 /showcases/visualizer/canvas/packetdrop/,   -f omnetpp.ini -c InterfaceNotConnected -r 0,                              500s,            f64d-a4cf/tplx;0000-0000/~tNl;0000-0000/~tND;79e8-0014/tyf, PASS,
-/showcases/visualizer/canvas/packetdrop/,   -f omnetpp.ini -c NoRouteToDestination -r 0,                               500s,            4c38-3589/tplx;0000-0000/~tNl;0000-0000/~tND;7c55-f424/tyf, PASS,
+/showcases/visualizer/canvas/packetdrop/,   -f omnetpp.ini -c NoRouteToDestination -r 0,                               500s,            4c38-3589/tplx;0000-0000/~tNl;0000-0000/~tND;72d3-5569/tyf, PASS,
 
 /showcases/visualizer/canvas/physicallinkactivity/, -f omnetpp.ini -c EnablingVisualization -r 0,                      500s,            a1da-0032/tplx;bde3-9c6e/~tNl;7f8e-b45a/~tND;b709-d035/tyf, PASS,    wireless
 /showcases/visualizer/canvas/physicallinkactivity/, -f omnetpp.ini -c Filtering -r 0,                                  250s,            1642-3498/tplx;02c5-9eab/~tNl;bc54-d5aa/~tND;494d-a1bc/tyf, PASS,    wireless
-/showcases/visualizer/canvas/physicallinkactivity/, -f omnetpp.ini -c Mobile -r 0,                                     500s,            a437-919f/tplx;03cf-d1b8/~tNl;82db-cd19/~tND;d862-14b5/tyf, PASS, wireless
+/showcases/visualizer/canvas/physicallinkactivity/, -f omnetpp.ini -c Mobile -r 0,                                     500s,            a437-919f/tplx;03cf-d1b8/~tNl;82db-cd19/~tND;cd7d-62e4/tyf, PASS, wireless
 
 # /showcases/visualizer/canvas/radiomediumactivity/,  -f omnetpp.ini -c DisplayingSignalsTransmissionsReceptions -r 0,       500s,            f98f-dd46/tplx;0000-0000/~tNl;0000-0000/~tND, PASS, wireless # unfinished
 # /showcases/visualizer/canvas/radiomediumactivity/,  -f omnetpp.ini -c DisplayingPropagationTransmissionsReceptionsV2 -r 0,       500s,            f98f-dd46/tplx;0000-0000/~tNl;0000-0000/~tND, PASS,    wireless
@@ -135,7 +135,7 @@
 
 /showcases/wireless/analogmodel/,     -f omnetpp.ini -c Routing -r 0,                5s,         06cd-3543/tplx;d346-1e86/~tNl;c7b2-5c28/~tND;38b7-f1c9/tyf, PASS,    wireless
 /showcases/wireless/analogmodel/,     -f omnetpp.ini -c Distance -r 0,                2.5s,         1e75-270e/tplx;6d7a-d84c/~tNl;9ccb-a57b/~tND;5a09-9640/tyf, PASS,    wireless
-/showcases/wireless/analogmodel/,     -f omnetpp.ini -c Noise -r 0,                0.1s,         971f-d936/tplx;3caf-a8f4/~tNl;f5e3-baf9/~tND;b132-29eb/tyf, PASS,    wireless
+/showcases/wireless/analogmodel/,     -f omnetpp.ini -c Noise -r 0,                0.1s,         971f-d936/tplx;3caf-a8f4/~tNl;f5e3-baf9/~tND;f6e7-f392/tyf, PASS,    wireless
 
 /showcases/wireless/blockack/,     -f omnetpp.ini -c NoFragmentation -r 0,                                        1s,            4821-e745/tplx;9018-08c8/~tNl;0665-70ed/~tND, PASS,    wireless
 /showcases/wireless/blockack/,     -f omnetpp.ini -c Fragmentation -r 0,                                          1s,            2d29-28dd/tplx;27bf-b5e5/~tNl;f566-61a0/~tND, PASS,    wireless
@@ -254,8 +254,8 @@
 /showcases/wireless/qos/,     -f omnetpp.ini -c NonQos -r 0,                                       10s,            ab73-19d4/tplx;fddd-9d77/~tNl;412f-f934/~tND;2970-2baa/tyf, PASS,    wireless
 /showcases/wireless/qos/,     -f omnetpp.ini -c Qos -r 0,                                        10s,            10c8-4277/tplx;af1c-eb97/~tNl;6441-9f1f/~tND;bd6e-c842/tyf, PASS,    wireless
 
-/showcases/wireless/ratecontrol/,    -f omnetpp.ini -c General -r 0,                  14s,            53c8-bc48/tplx;61c0-e63b/~tNl;cf1e-480e/~tND;da82-f924/tyf, PASS,    wireless
-/showcases/wireless/ratecontrol/,    -f omnetpp.ini -c General -r 1,                  12s,            855b-a300/tplx;5391-c30d/~tNl;0ee0-026e/~tND;5bfd-4020/tyf, PASS,    wireless
+/showcases/wireless/ratecontrol/,    -f omnetpp.ini -c General -r 0,                  14s,            53c8-bc48/tplx;61c0-e63b/~tNl;cf1e-480e/~tND;abb6-a61e/tyf, PASS,    wireless
+/showcases/wireless/ratecontrol/,    -f omnetpp.ini -c General -r 1,                  12s,            855b-a300/tplx;5391-c30d/~tNl;0ee0-026e/~tND;70de-bc9b/tyf, PASS,    wireless
 
 # /showcases/wireless/scaling/,        -f omnetpp.ini -c PingBase -r 0,               100s,         0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND, PASS,   # PingBase extended
 # /showcases/wireless/scaling/,        -f omnetpp.ini -c UDPBase -r 0,                100s,         0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND, PASS,   # UDPBase extended
@@ -277,12 +277,12 @@
 /showcases/wireless/sensornetwork/,  -f omnetpp.ini -c StatisticXMac -r 100,          100s,         3f3f-4791/tplx;2022-c179/~tNl;a504-71b6/tyf, PASS,    wireless
 /showcases/wireless/sensornetwork/,  -f omnetpp.ini -c StatisticLMac -r 100,          100s,         a5be-29ba/tplx;dd9d-26ec/~tNl;7c3b-8d6f/tyf, PASS,    wireless
 
-/showcases/wireless/sensornetwork/,  -f extras.ini -c BMacAodv -r 0,                   100s,         b771-6999/tplx;ddc4-6751/~tNl;746c-17ad/tyf, PASS,    wireless
-/showcases/wireless/sensornetwork/,  -f extras.ini -c XMacAodv -r 0,                   100s,         3300-529f/tplx;50a0-256f/~tNl;f737-81cc/tyf, PASS,    wireless
-/showcases/wireless/sensornetwork/,  -f extras.ini -c LMacAodv -r 0,                   100s,         6f81-5b02/tplx;1870-d2f9/~tNl;3c53-52ff/tyf, PASS,    wireless
-/showcases/wireless/sensornetwork/,  -f extras.ini -c BMacDsdv -r 0,                   100s,         d1c8-2b77/tplx;4a0e-5dca/~tNl;74fc-07a6/tyf, PASS,    wireless
-/showcases/wireless/sensornetwork/,  -f extras.ini -c XMacDsdv -r 0,                   100s,         0917-1bb4/tplx;c64f-34ee/~tNl;db64-5b3e/tyf, PASS,    wireless
-/showcases/wireless/sensornetwork/,  -f extras.ini -c LMacDsdv -r 0,                   100s,         0e67-f6b3/tplx;af60-efea/~tNl;e260-4a14/tyf, PASS,    wireless
+/showcases/wireless/sensornetwork/,  -f extras.ini -c BMacAodv -r 0,                   100s,         b771-6999/tplx;ddc4-6751/~tNl;7a21-68fb/tyf, PASS,    wireless
+/showcases/wireless/sensornetwork/,  -f extras.ini -c XMacAodv -r 0,                   100s,         3300-529f/tplx;50a0-256f/~tNl;09a6-f638/tyf, PASS,    wireless
+/showcases/wireless/sensornetwork/,  -f extras.ini -c LMacAodv -r 0,                   100s,         6f81-5b02/tplx;1870-d2f9/~tNl;eef7-bbd6/tyf, PASS,    wireless
+/showcases/wireless/sensornetwork/,  -f extras.ini -c BMacDsdv -r 0,                   100s,         d1c8-2b77/tplx;4a0e-5dca/~tNl;7ca4-311a/tyf, PASS,    wireless
+/showcases/wireless/sensornetwork/,  -f extras.ini -c XMacDsdv -r 0,                   100s,         0917-1bb4/tplx;c64f-34ee/~tNl;d130-5d4d/tyf, PASS,    wireless
+/showcases/wireless/sensornetwork/,  -f extras.ini -c LMacDsdv -r 0,                   100s,         0e67-f6b3/tplx;af60-efea/~tNl;2285-a8d2/tyf, PASS,    wireless
 
 /showcases/wireless/throughput/,     -f omnetpp.ini -c General -r 0,                1s,         030e-c416/tplx;66e6-0bca/~tNl;1b85-1592/~tND;0152-26c1/tyf, PASS,    wireless
 
