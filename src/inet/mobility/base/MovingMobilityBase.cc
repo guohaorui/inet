@@ -80,8 +80,10 @@ void MovingMobilityBase::orient()
 
 void MovingMobilityBase::handleSelfMessage(cMessage *message)
 {
-    moveAndUpdate();
-    scheduleUpdate();
+    if (message == moveTimer) {
+        moveAndUpdate();
+        scheduleUpdate();
+    }
 }
 
 void MovingMobilityBase::scheduleUpdate()
