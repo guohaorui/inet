@@ -36,6 +36,7 @@ ChiangMobility::ChiangMobility()
     stateTransitionUpdateInterval = 0;
     xState = 0;
     yState = 0;
+    borderPolicy = REFLECT;
 }
 
 void ChiangMobility::initialize(int stage)
@@ -78,13 +79,6 @@ void ChiangMobility::setTargetPosition()
     else
         lastVelocity = Coord::ZERO;
     targetPosition = lastPosition - lastVelocity * stateTransitionUpdateInterval;
-}
-
-void ChiangMobility::move()
-{
-    LineSegmentsMobilityBase::move();
-    Coord dummyCoord;
-    handleIfOutside(REFLECT, dummyCoord, lastVelocity);
 }
 
 } // namespace inet
