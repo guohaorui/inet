@@ -342,15 +342,6 @@ void MobilityBase::wrapIfOutside(Coord& targetPosition)
     }
 }
 
-void MobilityBase::placeRandomlyIfOutside(Coord& targetPosition)
-{
-    if (isOutside()) {
-        Coord newPosition = getRandomPosition();
-        targetPosition += newPosition - lastPosition;
-        lastPosition = newPosition;
-    }
-}
-
 void MobilityBase::raiseErrorIfOutside()
 {
     if (isOutside()) {
@@ -387,10 +378,6 @@ void MobilityBase::handleIfOutside(BorderPolicy policy, Coord& targetPosition, C
 
         case WRAP:
             wrapIfOutside(targetPosition);
-            break;
-
-        case PLACERANDOMLY:
-            placeRandomlyIfOutside(targetPosition);
             break;
 
         case RAISEERROR:
