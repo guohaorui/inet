@@ -9,7 +9,7 @@
     <charts>
         <chart icon="icons/full/obj/linechart.png" id="1483" name="End-to-end delay, Non-QoS" template="linechart_mpl" type="MATPLOTLIB">
             <script><![CDATA[import math
-from omnetpp.scave import results, chart, utils, plot, vectorops as ops
+from omnetpp.scave import results, chart, utils, ideplot, vectorops as ops
 import matplotlib.pyplot as plt
 import getAc as ac
 
@@ -26,11 +26,11 @@ end_time = float(props["vector_end_time"] or math.inf)
 try:
     df = results.get_vectors(filter_expression, include_attrs=True, include_itervars=True, start_time=start_time, end_time=end_time)
 except ValueError as e:
-    plot.set_warning("Error while querying results: " + str(e))
+    ideplot.set_warning("Error while querying results: " + str(e))
     exit(1)
 
 if df.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
 
 # apply vector operations
@@ -592,7 +592,7 @@ utils.export_data_if_needed(df, props)
         </chart>
         <chart icon="icons/full/obj/linechart.png" id="1484" name="End-to-end delay, QoS" template="linechart_mpl" type="MATPLOTLIB">
             <script><![CDATA[import math
-from omnetpp.scave import results, chart, utils, plot, vectorops as ops
+from omnetpp.scave import results, chart, utils, ideplot, vectorops as ops
 import matplotlib.pyplot as plt
 import getAc as ac
 
@@ -609,11 +609,11 @@ end_time = float(props["vector_end_time"] or math.inf)
 try:
     df = results.get_vectors(filter_expression, include_attrs=True, include_itervars=True, start_time=start_time, end_time=end_time)
 except ValueError as e:
-    plot.set_warning("Error while querying results: " + str(e))
+    ideplot.set_warning("Error while querying results: " + str(e))
     exit(1)
 
 if df.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
 
 # apply vector operations
@@ -1176,7 +1176,7 @@ utils.export_data_if_needed(df, props)
         </chart>
         <chart icon="icons/full/obj/linechart.png" id="1486" name="Instantaneous packet delay variation, non-QoS" template="linechart_mpl" type="MATPLOTLIB">
             <script><![CDATA[import math
-from omnetpp.scave import results, chart, utils, plot, vectorops as ops
+from omnetpp.scave import results, chart, utils, ideplot, vectorops as ops
 import matplotlib.pyplot as plt
 import getAc as ac
 import solid_x_axis as sxa
@@ -1194,11 +1194,11 @@ end_time = float(props["vector_end_time"] or math.inf)
 try:
     df = results.get_vectors(filter_expression, include_attrs=True, include_itervars=True, start_time=start_time, end_time=end_time)
 except ValueError as e:
-    plot.set_warning("Error while querying results: " + str(e))
+    ideplot.set_warning("Error while querying results: " + str(e))
     exit(1)
 
 if df.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
 
 # apply vector operations
@@ -1797,7 +1797,7 @@ plt.savefig('jitter_nonqos.png', dpi=150, transparent=True)
         </chart>
         <chart icon="icons/full/obj/linechart.png" id="1597" name="Instantaneous packet delay variation, non-QoS" template="linechart_mpl" type="MATPLOTLIB">
             <script><![CDATA[import math
-from omnetpp.scave import results, chart, utils, plot, vectorops as ops
+from omnetpp.scave import results, chart, utils, ideplot, vectorops as ops
 import matplotlib.pyplot as plt
 import getAc as ac
 import solid_x_axis as sxa
@@ -1815,11 +1815,11 @@ end_time = float(props["vector_end_time"] or math.inf)
 try:
     df = results.get_vectors(filter_expression, include_attrs=True, include_itervars=True, start_time=start_time, end_time=end_time)
 except ValueError as e:
-    plot.set_warning("Error while querying results: " + str(e))
+    ideplot.set_warning("Error while querying results: " + str(e))
     exit(1)
 
 if df.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
 
 # apply vector operations
@@ -2418,7 +2418,7 @@ plt.savefig('jitter_qos.png', dpi=150, transparent=True)
         </chart>
         <chart icon="icons/full/obj/linechart.png" id="1537" name="Throughput, non-QoS" template="linechart_mpl" type="MATPLOTLIB">
             <script><![CDATA[import math
-from omnetpp.scave import results, chart, utils, plot, vectorops as ops
+from omnetpp.scave import results, chart, utils, ideplot, vectorops as ops
 import matplotlib.pyplot as plt
 import getAc as ac
 
@@ -2435,11 +2435,11 @@ end_time = float(props["vector_end_time"] or math.inf)
 try:
     df = results.get_vectors(filter_expression, include_attrs=True, include_itervars=True, start_time=start_time, end_time=end_time)
 except ValueError as e:
-    plot.set_warning("Error while querying results: " + str(e))
+    ideplot.set_warning("Error while querying results: " + str(e))
     exit(1)
 
 if df.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
 
 # apply vector operations
@@ -2999,7 +2999,7 @@ plt.savefig('throughput_nonqos_.png', dpi=150, transparent=True)]]></script>
         </chart>
         <chart icon="icons/full/obj/linechart.png" id="1538" name="Throughput, QoS" template="linechart_mpl" type="MATPLOTLIB">
             <script><![CDATA[import math
-from omnetpp.scave import results, chart, utils, plot, vectorops as ops
+from omnetpp.scave import results, chart, utils, ideplot, vectorops as ops
 import matplotlib.pyplot as plt
 import getAc as ac
 
@@ -3016,11 +3016,11 @@ end_time = float(props["vector_end_time"] or math.inf)
 try:
     df = results.get_vectors(filter_expression, include_attrs=True, include_itervars=True, start_time=start_time, end_time=end_time)
 except ValueError as e:
-    plot.set_warning("Error while querying results: " + str(e))
+    ideplot.set_warning("Error while querying results: " + str(e))
     exit(1)
 
 if df.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
 
 # apply vector operations
@@ -3584,7 +3584,7 @@ plt.savefig('throughput_qos_.png', dpi=150, transparent=True)]]></script>
         </chart>
         <chart icon="icons/full/obj/linechart.png" id="1601" name="Instantaneous packet delay variation, both" template="linechart_mpl" type="MATPLOTLIB">
             <script><![CDATA[import math
-from omnetpp.scave import results, chart, utils, plot, vectorops as ops
+from omnetpp.scave import results, chart, utils, ideplot, vectorops as ops
 import matplotlib.pyplot as plt
 import numpy as np
 import getAc as ac
@@ -3621,15 +3621,15 @@ try:
     df_nonqos = results.get_vectors(filter_string_nonqos, include_attrs=True, include_itervars=True)
     df_qos = results.get_vectors(filter_string_qos, include_attrs=True, include_itervars=True)
 except ValueError as e:
-    plot.set_warning("Error while querying results: " + str(e))
+    ideplot.set_warning("Error while querying results: " + str(e))
     exit(1)
 
 if df_nonqos.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
     
 if df_qos.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
 
 df_nonqos['vecvalue'] *= 1000

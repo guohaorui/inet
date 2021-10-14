@@ -14,7 +14,7 @@
                 <![CDATA[import math
 import numpy as np
 import pandas as pd
-from omnetpp.scave import results, chart, plot, utils
+from omnetpp.scave import results, chart, ideplot, utils
 import matplotlib.pyplot as plt
 
 # get chart properties
@@ -28,7 +28,7 @@ filter_expression = props["filter"]
 df = results.get_scalars(filter_expression, include_attrs=True, include_itervars=True, include_runattrs=True)
 
 if df.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
 
 groups = props["groups"].split(",")
@@ -38,7 +38,7 @@ if not groups[0] and not series[0]:
     print("The Groups and Series options were not set in the dialog, inferring them from the data.")
     g, s = ("module", "name") if len(df) == 1 else utils.pick_two_columns(df)
     if not g or not s:
-        plot.set_warning("Please set the Groups and Series options in the dialog!")
+        ideplot.set_warning("Please set the Groups and Series options in the dialog!")
         exit(1)
     groups, series = [g], [s]
 
@@ -618,7 +618,7 @@ utils.export_data_if_needed(df, props)
         <chart icon="icons/full/obj/linechart.png" id="1528" name="Average throughput" template="linechart_mpl" type="MATPLOTLIB">
             <script>
                 <![CDATA[import math
-from omnetpp.scave import results, chart, utils, plot, vectorops as ops
+from omnetpp.scave import results, chart, utils, ideplot, vectorops as ops
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -636,7 +636,7 @@ end_time = float(props["vector_end_time"] or math.inf)
 df = results.get_vectors(filter_expression, include_attrs=True, include_itervars=True, include_runattrs=True, start_time=start_time, end_time=end_time)
 
 if df.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
 
 # apply vector operations
@@ -1248,7 +1248,7 @@ utils.export_data_if_needed(df, props)
         <chart icon="icons/full/obj/linechart.png" id="1536" name="End-to-end delay" template="linechart_mpl" type="MATPLOTLIB">
             <script>
                 <![CDATA[import math
-from omnetpp.scave import results, chart, utils, plot, vectorops as ops
+from omnetpp.scave import results, chart, utils, ideplot, vectorops as ops
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -1266,7 +1266,7 @@ end_time = float(props["vector_end_time"] or math.inf)
 df = results.get_vectors(filter_expression, include_attrs=True, include_itervars=True, include_runattrs=True, start_time=start_time, end_time=end_time)
 
 if df.empty:
-    plot.set_warning("The result filter returned no data.")
+    ideplot.set_warning("The result filter returned no data.")
     exit(1)
 
 # apply vector operations
