@@ -41,6 +41,7 @@ Ns2MotionMobility::Ns2MotionMobility()
     scrollX = 0;
     scrollY = 0;
     maxSpeed = 0;
+    borderPolicy = RAISEERROR;
 }
 
 void Ns2MotionMobility::computeMaxSpeed()
@@ -135,6 +136,7 @@ void Ns2MotionMobility::initialize(int stage)
 
     EV_TRACE << "initializing Ns2MotionMobility stage " << stage << endl;
     if (stage == INITSTAGE_LOCAL) {
+        borderPolicy = RAISEERROR;
         scrollX = par("scrollX");
         scrollY = par("scrollY");
         nodeId = par("nodeId");
@@ -195,12 +197,6 @@ void Ns2MotionMobility::setTargetPosition()
         nextChange = now + travelTime;
         vecpos++;
     }
-}
-
-void Ns2MotionMobility::move()
-{
-    LineSegmentsMobilityBase::move();
-    raiseErrorIfOutside();
 }
 
 } // namespace inet
