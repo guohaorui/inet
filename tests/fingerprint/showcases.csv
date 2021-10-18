@@ -18,6 +18,19 @@
 
 /showcases/general/pcaprecording/,   -f omnetpp.ini -c PcapRecording -r 0,          10s,         057b-7878/tplx;96d0-d13f/~tNl;87f0-5b5f/~tND;f469-ef07/tyf, PASS,    wireless
 
+/showcases/measurement/datarate/,         -f omnetpp.ini -c General -r 0,           1s,           1e65-052e/tplx;1f27-262f/~tNl;46a9-810f/~tND;779b-6658/tyf, PASS,
+/showcases/measurement/endtoenddelay/,    -f omnetpp.ini -c General -r 0,           1s,           d72a-d3f0/tplx;6219-a707/~tNl;f390-1153/~tND;3b0e-e8ea/tyf, PASS,
+/showcases/measurement/flow/,             -f omnetpp.ini -c Basic -r 0,             1s,           c476-d375/tplx;9346-a275/~tNl;d054-7d02/~tND;1237-010d/tyf, PASS,
+/showcases/measurement/flow/,             -f omnetpp.ini -c AnyLocation -r 0,       1s,           1211-c17f/tplx;0000-0000/~tNl;0000-0000/~tND;497e-9125/tyf, PASS,
+/showcases/measurement/jitter/,           -f omnetpp.ini -c General -r 0,           1s,           0a57-9abf/tplx;459e-d78b/~tNl;d2eb-2a61/~tND;3b0e-e8ea/tyf, PASS,
+/showcases/measurement/propagationtime/,  -f omnetpp.ini -c General -r 0,           1s,           02d1-d400/tplx;6c8f-a9f1/~tNl;eebb-f659/~tND;e20d-aa60/tyf, PASS,
+/showcases/measurement/queueingtime/,     -f omnetpp.ini -c General -r 0,           1s,           d02a-6116/tplx;5b80-c978/~tNl;c3b6-270e/~tND;3b0e-e8ea/tyf, PASS,
+/showcases/measurement/relationships/,    -f omnetpp.ini -c General -r 0,           1s,           1211-c17f/tplx;0000-0000/~tNl;0000-0000/~tND;497e-9125/tyf, PASS,
+/showcases/measurement/residencetime/,    -f omnetpp.ini -c General -r 0,           1s,           8448-915f/tplx;ecaa-743f/~tNl;b6dc-b8ad/~tND;5fdd-bd6d/tyf, PASS,
+/showcases/measurement/throughput/,       -f omnetpp.ini -c General -r 0,           1s,           3af3-6fab/tplx;c8ee-58eb/~tNl;488e-6390/~tND;0478-cc1d/tyf, PASS,
+/showcases/measurement/transmissiontime/, -f omnetpp.ini -c General -r 0,           1s,           f862-1f08/tplx;6925-5f15/~tNl;ea46-2a2f/~tND;e20d-aa60/tyf, PASS,
+/showcases/measurement/utilization/,      -f omnetpp.ini -c General -r 0,           1s,           6bc1-15b0/tplx;f4c9-bd46/~tNl;2901-3757/~tND;8c74-6d3d/tyf, PASS,
+
 /showcases/mobility/basic/,          -f omnetpp.ini -c LinearMobility -r 0,         100s,         1211-c17f/tplx;0000-0000/~tNl;0000-0000/~tND;497e-9125/tyf, PASS,
 /showcases/mobility/basic/,          -f omnetpp.ini -c CircleMobility -r 0,         100s,         6226-0ee5/tplx;0000-0000/~tNl;0000-0000/~tND;4630-5dfc/tyf, PASS,
 /showcases/mobility/basic/,          -f omnetpp.ini -c TurtleMobility -r 0,         100s,         bab2-85af/tplx;0000-0000/~tNl;0000-0000/~tND;73bf-7dcf/tyf, PASS,
