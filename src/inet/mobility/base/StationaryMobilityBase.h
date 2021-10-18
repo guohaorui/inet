@@ -30,11 +30,9 @@ class INET_API StationaryMobilityBase : public MobilityBase
   public:
     virtual const Quaternion& getCurrentAngularPosition() override { return lastOrientation; }
     virtual const Quaternion& getCurrentAngularVelocity() override { return Quaternion::IDENTITY; }
-    virtual const Quaternion& getCurrentAngularAcceleration() override { return Quaternion::IDENTITY; }
 
     virtual const Coord& getCurrentPosition() override { return lastPosition; }
     virtual const Coord& getCurrentVelocity() override { return Coord::ZERO; }
-    virtual const Coord& getCurrentAcceleration() override { return Coord::ZERO; }
 
     virtual double getMaxSpeed() const override { return 0; }
 

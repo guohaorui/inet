@@ -69,9 +69,6 @@ const char *MobilityBase::DirectiveResolver::resolveDirective(char directive) co
         case 's':
             result = std::to_string(mobility->getCurrentVelocity().length());
             break;
-        case 'a':
-            result = mobility->getCurrentAcceleration().str();
-            break;
         case 'P':
             result = mobility->getCurrentAngularPosition().str();
             break;
@@ -86,9 +83,6 @@ const char *MobilityBase::DirectiveResolver::resolveDirective(char directive) co
             result = std::to_string(angle);
             break;
         }
-        case 'A':
-            result = mobility->getCurrentAngularAcceleration().str();
-            break;
         default:
             throw cRuntimeError("Unknown directive: %c", directive);
     }

@@ -64,11 +64,9 @@ class INET_API SuperpositioningMobility : public MobilityBase, public cListener
   public:
     virtual const Coord& getCurrentPosition() override;
     virtual const Coord& getCurrentVelocity() override;
-    virtual const Coord& getCurrentAcceleration() override;
 
     virtual const Quaternion& getCurrentAngularPosition() override;
     virtual const Quaternion& getCurrentAngularVelocity() override;
-    virtual const Quaternion& getCurrentAngularAcceleration() override;
 
     virtual void receiveSignal(cComponent *source, simsignal_t signal, cObject *object, cObject *details) override;
 };
