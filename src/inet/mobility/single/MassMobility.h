@@ -43,8 +43,6 @@ class INET_API MassMobility : public LineSegmentsMobilityBase
 
     // state
     Quaternion quaternion;
-    simtime_t previousChange;
-    Coord sourcePosition;
 
   protected:
     virtual int numInitStages() const override { return NUM_INIT_STAGES; }
@@ -54,6 +52,7 @@ class INET_API MassMobility : public LineSegmentsMobilityBase
 
     /** @brief Move the host according to the current simulation time. */
     virtual void move() override;
+    virtual void processBorderPolicy() override;
     void orient() override;
 
     /** @brief Calculate a new target position to move to. */
