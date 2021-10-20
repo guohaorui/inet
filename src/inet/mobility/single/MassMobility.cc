@@ -74,7 +74,13 @@ void MassMobility::processBorderPolicy()
 {
     Coord dummyCoord;
     rad dummyAngle;
-    handleIfOutside(borderPolicy, targetPosition, lastVelocity, dummyAngle, dummyAngle, quaternion);
+    if (simTime() == nextChange) {
+        handleIfOutside(borderPolicy, targetPosition, lastVelocity, dummyAngle, dummyAngle, quaternion);
+        orient();
+    }
+    else {
+        handleIfOutside(borderPolicy, dummyCoord, lastVelocity, dummyAngle, dummyAngle, lastOrientation);
+    }
 }
 
 void MassMobility::move()
@@ -83,7 +89,7 @@ void MassMobility::move()
     if (now == nextChange) {
         lastPosition = targetPosition;
         processBorderPolicy();
-        ASSERT(lastPosition == targetPosition);
+        targetPosition = lastPosition;
         EV_INFO << "reached current target position = " << lastPosition << endl;
         doSetTargetPosition();
     }
