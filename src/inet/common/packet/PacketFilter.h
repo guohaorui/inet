@@ -75,6 +75,9 @@ class INET_API PacketFilter
     virtual ~PacketFilter() { delete packetDissectorCallback; }
 
     void setExpression(const char *expression);
+    void setExpression(const cExpression *expression);
+    void setExpression(const cPar& par);
+    void setExpression(const cValue value);
 
     bool matches(const cPacket *packet) const;
 };

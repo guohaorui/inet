@@ -30,6 +30,27 @@ void PacketFilter::setExpression(const char *expression)
     filterExpression.parse(expression, dynamicExpressionResolver);
 }
 
+void PacketFilter::setExpression(const cExpression *expression)
+{
+    if (expression->isAConstant())
+        setExpression((std::string("name =~ '") + expression->str() + "'").c_str());
+    else
+        setExpression(expression->str().c_str());
+}
+
+void PacketFilter::setExpression(const cPar& par)
+{
+    if (par.isExpression())
+        setExpression(par.getExpression());
+    else
+        setExpression((std::string("name =~ '") + par.stdstringValue() + "'").c_str());
+}
+
+void PacketFilter::setExpression(const cValue value)
+{
+    setExpression(check_and_cast<cExpression *>(value.objectValue()));
+}
+
 bool PacketFilter::matches(const cPacket *cpacket) const
 {
     this->cpacket = cpacket;

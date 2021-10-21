@@ -10,7 +10,7 @@ Test for packet filtering.
 using namespace omnetpp;
 using namespace inet;
 
-#define TEST(CONDITION, PACKET) filter.setExpression(CONDITION); try { bool result = filter.matches(&PACKET); std::cout << CONDITION << " -> " << (result ? "true" : "false") << std::endl; } catch (std::exception& e) { std::cout << CONDITION << " -> " << e.what() << std::endl; }
+#define TEST(CONDITION, PACKET) { cExpression expression; expression.parse(CONDITION); filter.setExpression(&expression); try { bool result = filter.matches(&PACKET); std::cout << CONDITION << " -> " << (result ? "true" : "false") << std::endl; } catch (std::exception& e) { std::cout << CONDITION << " -> " << e.what() << std::endl; } }
 
 %activity:
 
@@ -143,6 +143,7 @@ TEST("EthernetMacHeader == null", packet);
 TEST("name == 'P1' && totalLength == 128B && ipv4.destAddress.str() == '10.0.0.1' && udp.destPort == 42", packet);
 
 %contains: stdout
+* -> true
 false -> false
 true -> true
 pk.hasBitError -> false
