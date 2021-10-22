@@ -96,7 +96,7 @@
 
 /showcases/visualizer/canvas/physicallinkactivity/, -f omnetpp.ini -c EnablingVisualization -r 0,                      500s,            a1da-0032/tplx;bde3-9c6e/~tNl;7f8e-b45a/~tND;b709-d035/tyf, PASS,    wireless
 /showcases/visualizer/canvas/physicallinkactivity/, -f omnetpp.ini -c Filtering -r 0,                                  250s,            1642-3498/tplx;02c5-9eab/~tNl;bc54-d5aa/~tND;494d-a1bc/tyf, PASS,    wireless
-/showcases/visualizer/canvas/physicallinkactivity/, -f omnetpp.ini -c Mobile -r 0,                                     500s,            a437-919f/tplx;03cf-d1b8/~tNl;82db-cd19/~tND;cd7d-62e4/tyf, PASS, wireless
+/showcases/visualizer/canvas/physicallinkactivity/, -f omnetpp.ini -c Mobile -r 0,                                     500s,            a437-919f/tplx;03cf-d1b8/~tNl;82db-cd19/~tND, PASS, wireless
 
 # /showcases/visualizer/canvas/radiomediumactivity/,  -f omnetpp.ini -c DisplayingSignalsTransmissionsReceptions -r 0,       500s,            f98f-dd46/tplx;0000-0000/~tNl;0000-0000/~tND, PASS, wireless # unfinished
 # /showcases/visualizer/canvas/radiomediumactivity/,  -f omnetpp.ini -c DisplayingPropagationTransmissionsReceptionsV2 -r 0,       500s,            f98f-dd46/tplx;0000-0000/~tNl;0000-0000/~tND, PASS,    wireless

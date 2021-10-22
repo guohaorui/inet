@@ -585,7 +585,7 @@
 /examples/wireless/nic/,             -f omnetpp.ini -c CsmaCaWithUnitDiskRadio -r 0,              100s,    46d8-2bd9/tplx;8c5b-6403/~tNl;0527-b945/~tND, PASS, wireless
 /examples/wireless/nic/,             -f omnetpp.ini -c CsmaCaWithApskScalarRadio -r 0,            100s,    46d8-2bd9/tplx;8c5b-6403/~tNl;5956-0e40/~tND, PASS, wireless
 /examples/wireless/nic/,             -f omnetpp.ini -c CsmaCaWithApskDimensionalRadio -r 0,       100s,    46d8-2bd9/tplx;8c5b-6403/~tNl;5956-0e40/~tND, PASS, wireless
-/examples/wireless/nic/,             -f omnetpp.ini -c BMacWithUnitDiskRadio -r 0,                100s,     8311-cebe/tplx;082c-ca7d/~tNl;d9fd-bed7/tyf, PASS, wireless
+/examples/wireless/nic/,             -f omnetpp.ini -c BMacWithUnitDiskRadio -r 0,                100s,     8311-cebe/tplx;082c-ca7d/~tNl, PASS, wireless
 /examples/wireless/nic/,             -f omnetpp.ini -c BMacWithApskScalarRadio -r 0,              100s,     a546-c8da/tplx;14f4-ecfa/~tNl;e72f-3500/tyf, PASS, wireless
 /examples/wireless/nic/,             -f omnetpp.ini -c BMacWithApskDimensionalRadio -r 0,         100s,     a546-c8da/tplx;14f4-ecfa/~tNl;e72f-3500/tyf, PASS, wireless
 /examples/wireless/nic/,             -f omnetpp.ini -c XMacWithUnitDiskRadio -r 0,                100s,     2fc2-e751/tplx;8594-8455/~tNl;aaa0-e6d4/~tND;1d2c-5aa3/tyf, PASS, wireless
