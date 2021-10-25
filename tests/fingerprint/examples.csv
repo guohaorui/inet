@@ -396,35 +396,35 @@
 
 /examples/mobileipv6/,               -f omnetpp.ini -c One -r 0,                    25s,             2bcd-e29b/tplx;a15f-a225/~tNl;c873-d0b1/~tND;8240-3c96/tyf, PASS, wireless
 
-/examples/mobility/,                 -f omnetpp.ini -c AnsimMobility -r 0,          10000s,          72f8-5c0b/tplx;0000-0000/~tNl;0000-0000/~tND;3152-f194/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c BonnMotionMobility1 -r 0,    10000s,          ce84-30b6/tplx;0000-0000/~tNl;0000-0000/~tND;37b9-3297/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c BonnMotionMobility2 -r 0,    10000s,          5e8f-b884/tplx;0000-0000/~tNl;0000-0000/~tND, PASS,                 # do not move nodes simtime always 0 at all events
-/examples/mobility/,                 -f omnetpp.ini -c ChiangMobility -r 0,         10000s,          4b3c-6272/tplx;0000-0000/~tNl;0000-0000/~tND;211b-fa83/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c CircleMobility1 -r 0,        10000s,          910a-0363/tplx;0000-0000/~tNl;0000-0000/~tND;376a-9a6c/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c CircleMobility2 -r 0,        10000s,          910a-0363/tplx;0000-0000/~tNl;0000-0000/~tND;7b1e-023e/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c GaussMarkovMobility -r 0,    10000s,          4b3c-6272/tplx;0000-0000/~tNl;0000-0000/~tND;99dc-e924/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c AnsimMobility -r 0,          10000s,          72f8-5c0b/tplx;134b-8feb/tpM;3152-f194/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c BonnMotionMobility1 -r 0,    10000s,          ce84-30b6/tplx;24be-793e/tpM;37b9-3297/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c BonnMotionMobility2 -r 0,    10000s,          5e8f-b884/tplx;fcb3-f641/tpM;0000-0000/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c ChiangMobility -r 0,         10000s,          4b3c-6272/tplx;a960-9b6d/tpM;211b-fa83/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c CircleMobility1 -r 0,        10000s,          910a-0363/tplx;2e07-72ea/tpM;376a-9a6c/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c CircleMobility2 -r 0,        10000s,          910a-0363/tplx;bbd3-69e4/tpM;7b1e-023e/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c GaussMarkovMobility -r 0,    10000s,          4b3c-6272/tplx;7bbf-fb0b/tpM;99dc-e924/tyf, PASS,
 # /examples/mobility/,                 -f omnetpp.ini -c LinearMobility -r 0,       # LinearMobility extended
-/examples/mobility/,                 -f omnetpp.ini -c LinearMobility01 -r 0,       10000s,          4860-beb1/tplx;0000-0000/~tNl;0000-0000/~tND;0bd9-c429/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c LinearMobility1 -r 0,        10000s,          c433-b32d/tplx;0000-0000/~tNl;0000-0000/~tND;d1e6-3fd6/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c LinearMobility10 -r 0,       10000s,          ecf3-5334/tplx;0000-0000/~tNl;0000-0000/~tND;48be-12b4/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c LinearMobility100 -r 0,      10000s,          fcd5-da2e/tplx;0000-0000/~tNl;0000-0000/~tND;708b-4121/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c LinearMobility1000 -r 0,     10000s,          380f-162e/tplx;0000-0000/~tNl;0000-0000/~tND;901c-70f2/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c MassMobility -r 0,           5000s,           b764-ab4a/tplx;0000-0000/~tNl;0000-0000/~tND;55b3-bb0e/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c MassMobilityWithScenario -r 0, 10000s,        bb94-612c/tplx;0000-0000/~tNl;0000-0000/~tND;8580-258c/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c MoBANMobility1 -r 0,         10000s,          74ce-1773/tplx;0000-0000/~tNl;0000-0000/~tND;2717-5ca5/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c MoBANMobility2 -r 0,         10000s,          a8b6-14aa/tplx;0000-0000/~tNl;0000-0000/~tND;aadb-9006/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c RandomWaypointMobility1 -r 0, 5000s,          deb8-422c/tplx;0000-0000/~tNl;0000-0000/~tND;2f09-8074/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c RandomWaypointMobility2 -r 0, 5000s,          da35-f460/tplx;0000-0000/~tNl;0000-0000/~tND;3285-d52a/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c RectangleMobility -r 0,      10000s,          4860-beb1/tplx;0000-0000/~tNl;0000-0000/~tND;7ac1-813f/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c StaticGridMobility -r 0,     0s,              0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND;0000-0000/tyf, PASS,         # (zero time simulated)
-/examples/mobility/,                 -f omnetpp.ini -c StationaryMobility -r 0,     0s,              0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND;0000-0000/tyf, PASS,         # (zero time simulated)
-/examples/mobility/,                 -f omnetpp.ini -c TractorMobility -r 0,        10000s,          4b3c-6272/tplx;0000-0000/~tNl;0000-0000/~tND;d72c-bdc0/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility1 -r 0,        10000s,          0e28-b6e3/tplx;0000-0000/~tNl;0000-0000/~tND;8789-56d1/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility2 -r 0,        10000s,          67c8-fee0/tplx;0000-0000/~tNl;0000-0000/~tND;9cfc-e867/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility3 -r 0,        10000s,          a39d-5092/tplx;0000-0000/~tNl;0000-0000/~tND;967b-27b8/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility4 -r 0,        10000s,          9511-7d84/tplx;0000-0000/~tNl;0000-0000/~tND;5e2d-9ead/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility5 -r 0,        10000s,          9511-7d84/tplx;0000-0000/~tNl;0000-0000/~tND;a637-60c8/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility6 -r 0,        10000s,          0e4c-de72/tplx;0000-0000/~tNl;0000-0000/~tND;22cd-9a0f/tyf, ERROR,
+/examples/mobility/,                 -f omnetpp.ini -c LinearMobility01 -r 0,       10000s,          4860-beb1/tplx;d3ef-f1f3/tpM;0bd9-c429/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c LinearMobility1 -r 0,        10000s,          c433-b32d/tplx;eec4-9561/tpM;d1e6-3fd6/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c LinearMobility10 -r 0,       10000s,          ecf3-5334/tplx;23bc-afc0/tpM;48be-12b4/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c LinearMobility100 -r 0,      10000s,          fcd5-da2e/tplx;efd3-4286/tpM;708b-4121/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c LinearMobility1000 -r 0,     10000s,          380f-162e/tplx;2b4a-95a7/tpM;901c-70f2/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c MassMobility -r 0,           5000s,           b764-ab4a/tplx;ca6a-eb38/tpM;55b3-bb0e/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c MassMobilityWithScenario -r 0, 10000s,        bb94-612c/tplx;8cbd-9fd3/tpM;8580-258c/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c MoBANMobility1 -r 0,         10000s,          74ce-1773/tplx;d949-05a6/tpM;2717-5ca5/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c MoBANMobility2 -r 0,         10000s,          a8b6-14aa/tplx;2a5f-c046/tpM;aadb-9006/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c RandomWaypointMobility1 -r 0, 5000s,          deb8-422c/tplx;d640-6abf/tpM;2f09-8074/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c RandomWaypointMobility2 -r 0, 5000s,          da35-f460/tplx;ea0d-49da/tpM;3285-d52a/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c RectangleMobility -r 0,      10000s,          4860-beb1/tplx;ada3-5795/tpM;7ac1-813f/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c StaticGridMobility -r 0,     0s,              0000-0000/tplx;0000-0000/tpM;0000-0000/tyf, PASS,         # (zero time simulated)
+/examples/mobility/,                 -f omnetpp.ini -c StationaryMobility -r 0,     0s,              0000-0000/tplx;0000-0000/tpM;0000-0000/tyf, PASS,         # (zero time simulated)
+/examples/mobility/,                 -f omnetpp.ini -c TractorMobility -r 0,        10000s,          4b3c-6272/tplx;3d83-cfa3/tpM;d72c-bdc0/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility1 -r 0,        10000s,          0e28-b6e3/tplx;8d0c-26d8/tpM;8789-56d1/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility2 -r 0,        10000s,          67c8-fee0/tplx;c07d-827a/tpM;9cfc-e867/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility3 -r 0,        10000s,          a39d-5092/tplx;6f0d-6a0e/tpM;967b-27b8/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility4 -r 0,        10000s,          9511-7d84/tplx;67de-56da/tpM;5e2d-9ead/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility5 -r 0,        10000s,          9511-7d84/tplx;fc45-e85e/tpM;a637-60c8/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility6 -r 0,        10000s,          0e4c-de72/tplx;0000-0000/tpM;22cd-9a0f/tyf, ERROR,
 
 /examples/mpls/ldp/,                 -f omnetpp.ini -c General -r 0,                50s,             cec2-1f1f/tplx;36d7-02a9/~tNl;a511-cabe/tyf, PASS,
 /examples/mpls/net37/,               -f omnetpp.ini -c General -r 0,                100s,            0000-0000/tplx;0000-0000/~tNl;0000-0000/~tND;0000-0000/tyf, ERROR,    # <!> Error in module (TED) R37.LSR0.ted (id=45) during network initialization: Model error: ASSERT: condition !remote.isUnspecified() false in function initialize, networklayer/ted/TED.cc line 86.
