@@ -19,6 +19,7 @@
 
 #include "inet/common/ModuleAccess.h"
 #include "inet/common/packet/Packet.h"
+#include "inet/mobility/contract/IMobility.h"
 #include "inet/networklayer/common/NetworkInterface.h"
 
 namespace inet {
@@ -38,6 +39,18 @@ cSingleFingerprintCalculator::FingerprintIngredient FingerprintCalculator::valid
         return (cSingleFingerprintCalculator::FingerprintIngredient)ch;
     else
         return cSingleFingerprintCalculator::validateIngredient(ch);
+}
+
+inline cHasher& operator<<(cHasher& o, const Coord& coord)
+{
+    o << coord.x << coord.y << coord.z;
+    return o;
+}
+
+inline cHasher& operator<<(cHasher& o, const Quaternion& q)
+{
+    o << q.s << q.v;
+    return o;
 }
 
 bool FingerprintCalculator::addEventIngredient(cEvent *event, cSingleFingerprintCalculator::FingerprintIngredient ingredient)
@@ -65,7 +78,7 @@ bool FingerprintCalculator::addEventIngredient(cEvent *event, cSingleFingerprint
                         hasher_ << arrivalInterface->getInterfaceFullPath();
                 }
                 break;
-            case PACKET_DATA: {
+            case PACKET_DATA:
                 if (auto cpacket = dynamic_cast<cPacket *>(event)) {
                     auto packet = dynamic_cast<Packet *>(cpacket);
                     if (packet == nullptr)
@@ -80,6 +93,23 @@ bool FingerprintCalculator::addEventIngredient(cEvent *event, cSingleFingerprint
                             const auto& content = packet->peekAllAsBits();
                             for (auto bit : content->getBits())
                                 hasher_ << bit;
+                        }
+                    }
+                }
+                break;
+            case NETWORK_NODE_MOBILITY_DATA: {
+                if (auto msg = dynamic_cast<cMessage *>(event)) {
+                    if (auto arrivalNode = findContainingNode(msg->getArrivalModule())) {
+                        auto mobilityModule = arrivalNode->getSubmodule("mobility");
+                        if (mobilityModule) {
+                            IMobility *mobility = check_and_cast_nullable<IMobility *>(mobilityModule);
+                            hasher_ << mobility->getCurrentPosition()
+                                    << mobility->getCurrentVelocity()
+                                    << mobility->getCurrentAngularPosition()
+                                    << mobility->getCurrentAngularVelocity()
+                                    << mobility->getCurrentAcceleration()
+                                    << mobility->getCurrentAngularAcceleration()
+                                ;
                         }
                     }
                 }

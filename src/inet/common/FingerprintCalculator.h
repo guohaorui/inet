@@ -22,7 +22,7 @@
 
 namespace inet {
 
-#define INET_FINGERPRINT_INGREDIENTS    "~UNID"
+#define INET_FINGERPRINT_INGREDIENTS    "~UNIDM"
 
 class INET_API FingerprintCalculator : public cSingleFingerprintCalculator
 {
@@ -33,6 +33,7 @@ class INET_API FingerprintCalculator : public cSingleFingerprintCalculator
         NETWORK_NODE_PATH            = 'N',
         NETWORK_INTERFACE_PATH       = 'I',
         PACKET_DATA                  = 'D',
+        NETWORK_NODE_MOBILITY_DATA   = 'M',
     };
 
   protected:
