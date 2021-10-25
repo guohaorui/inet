@@ -35,6 +35,9 @@ class INET_API LinearMobility : public MovingMobilityBase
 {
   protected:
     double speed;
+    simtime_t startTime;
+    Coord startPosition;
+    Coord startVelocity;
 
   protected:
     virtual int numInitStages() const override { return NUM_INIT_STAGES; }
