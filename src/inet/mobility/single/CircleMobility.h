@@ -61,6 +61,7 @@ class INET_API CircleMobility : public MovingMobilityBase
     virtual double getMaxSpeed() const override { return speed; }
 
     virtual const Quaternion& getCurrentAngularVelocity() override { return lastAngularVelocity; }
+    virtual const Quaternion& getCurrentAngularAcceleration() override { return Quaternion::IDENTITY; }
 };
 
 } // namespace inet

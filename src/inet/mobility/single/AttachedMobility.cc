@@ -81,6 +81,16 @@ const Coord& AttachedMobility::getCurrentVelocity()
     return lastVelocity;
 }
 
+const Coord& AttachedMobility::getCurrentAcceleration()
+{
+    if (isZeroOffset)
+        return mobility->getCurrentAcceleration();
+    else {
+        // TODO
+        return Coord::NIL;
+    }
+}
+
 const Quaternion& AttachedMobility::getCurrentAngularPosition()
 {
     lastAngularPosition = mobility->getCurrentAngularPosition();
@@ -91,6 +101,11 @@ const Quaternion& AttachedMobility::getCurrentAngularPosition()
 const Quaternion& AttachedMobility::getCurrentAngularVelocity()
 {
     return mobility->getCurrentAngularVelocity();
+}
+
+const Quaternion& AttachedMobility::getCurrentAngularAcceleration()
+{
+    return mobility->getCurrentAngularAcceleration();
 }
 
 } // namespace inet

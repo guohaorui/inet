@@ -70,6 +70,11 @@ class INET_API IMobility
     virtual const Coord& getCurrentVelocity() = 0;
 
     /**
+     * Returns the acceleration at the current simulation time.
+     */
+    virtual const Coord& getCurrentAcceleration() = 0;
+
+    /**
      * Returns the angular position at the current simulation time.
      */
     virtual const Quaternion& getCurrentAngularPosition() = 0;
@@ -78,6 +83,11 @@ class INET_API IMobility
      * Returns the angular velocity at the current simulation time.
      */
     virtual const Quaternion& getCurrentAngularVelocity() = 0;
+
+    /**
+     * Returns the angular acceleration at the current simulation time.
+     */
+    virtual const Quaternion& getCurrentAngularAcceleration() = 0;
 
     /**
      * Returns the maximum position along each axes for.
