@@ -20,7 +20,7 @@
 
 /showcases/mobility/basic/,          -f omnetpp.ini -c LinearMobility -r 0,         100s,         1211-c17f/tplx;cf57-2a6f/tpM;497e-9125/tyf, PASS,
 /showcases/mobility/basic/,          -f omnetpp.ini -c CircleMobility -r 0,         100s,         6226-0ee5/tplx;3cbd-683e/tpM;4630-5dfc/tyf, PASS,
-/showcases/mobility/basic/,          -f omnetpp.ini -c TurtleMobility -r 0,         100s,         bab2-85af/tplx;a062-3b36/tpM;bb19-2a7f/tyf, PASS,
+/showcases/mobility/basic/,          -f omnetpp.ini -c TurtleMobility -r 0,         100s,         bab2-85af/tplx;2f14-f7b1/tpM;bb19-2a7f/tyf, PASS,
 /showcases/mobility/basic/,          -f omnetpp.ini -c FacingMobility -r 0,         100s,         1fca-7a6f/tplx;5afb-ae2b/tpM;b309-64c3/tyf, PASS,
 /showcases/mobility/basic/,          -f omnetpp.ini -c GaussMarkovMobility -r 0,    100s,         1211-c17f/tplx;6142-f54d/tpM;8009-d8c9/tyf, PASS,
 /showcases/mobility/basic/,          -f omnetpp.ini -c StaticGridMobility -r 0,     100s,         0000-0000/tplx;0000-0000/tpM;3303-ad79/tyf, PASS,

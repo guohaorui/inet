@@ -422,7 +422,7 @@
 /examples/mobility/,                 -f omnetpp.ini -c TurtleMobility1 -r 0,        10000s,          0e28-b6e3/tplx;8d0c-26d8/tpM;8789-56d1/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c TurtleMobility2 -r 0,        10000s,          67c8-fee0/tplx;c07d-827a/tpM;9cfc-e867/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c TurtleMobility3 -r 0,        10000s,          a39d-5092/tplx;6f0d-6a0e/tpM;967b-27b8/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility4 -r 0,        10000s,          9511-7d84/tplx;67de-56da/tpM;5e2d-9ead/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c TurtleMobility4 -r 0,        10000s,          9511-7d84/tplx;ca4b-b157/tpM;5e2d-9ead/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c TurtleMobility5 -r 0,        10000s,          9511-7d84/tplx;fc45-e85e/tpM;a637-60c8/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c TurtleMobility6 -r 0,        10000s,          0e4c-de72/tplx;0000-0000/tpM;22cd-9a0f/tyf, ERROR,
 
