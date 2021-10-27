@@ -63,9 +63,9 @@ void RectangleMobility::initialize(int stage)
     }
 }
 
-void RectangleMobility::setInitialPosition()
+void RectangleMobility::setInitialMobilityData()
 {
-    MovingMobilityBase::setInitialPosition();
+    MovingMobilityBase::setInitialMobilityData();
     move();
 }
 

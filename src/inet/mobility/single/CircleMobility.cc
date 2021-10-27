@@ -45,7 +45,7 @@ void CircleMobility::initialize(int stage)
     }
 }
 
-void CircleMobility::setInitialPosition()
+void CircleMobility::setInitialMobilityData()
 {
     move();
     orient();

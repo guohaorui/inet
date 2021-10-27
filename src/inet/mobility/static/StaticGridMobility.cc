@@ -23,7 +23,7 @@ namespace inet {
 
 Define_Module(StaticGridMobility);
 
-void StaticGridMobility::setInitialPosition()
+void StaticGridMobility::setInitialMobilityData()
 {
     int numHosts = par("numHosts");
     double marginX = par("marginX");

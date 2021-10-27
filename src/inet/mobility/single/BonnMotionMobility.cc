@@ -79,7 +79,7 @@ void BonnMotionMobility::initialize(int stage)
     }
 }
 
-void BonnMotionMobility::setInitialPosition()
+void BonnMotionMobility::setInitialMobilityData()
 {
     const BonnMotionFile::Line& vec = *lines;
     if (lines->size() >= 3) {

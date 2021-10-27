@@ -24,7 +24,7 @@ namespace inet {
 
 Define_Module(StaticConcentricMobility);
 
-void StaticConcentricMobility::setInitialPosition()
+void StaticConcentricMobility::setInitialMobilityData()
 {
     unsigned int numHosts = par("numHosts");
     double distance = par("distance");
