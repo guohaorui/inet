@@ -110,6 +110,14 @@ bool FingerprintCalculator::addEventIngredient(cEvent *event, cSingleFingerprint
                                     << mobility->getCurrentAcceleration()
                                     << mobility->getCurrentAngularAcceleration()
                                 ;
+                            EV_TRACE << "pos:" << mobility->getCurrentPosition()
+                                    << ", vel:" << mobility->getCurrentVelocity()
+                                    << ", angpos:" << mobility->getCurrentAngularPosition()
+                                    << ", angvel:" << mobility->getCurrentAngularVelocity()
+                                    << ", acc:" << mobility->getCurrentAcceleration()
+                                    << ", angacc:" << mobility->getCurrentAngularAcceleration()
+                                    << endl;
+                                ;
                         }
                     }
                 }
