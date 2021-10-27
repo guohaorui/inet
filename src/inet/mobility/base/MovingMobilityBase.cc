@@ -43,13 +43,15 @@ void MovingMobilityBase::initialize(int stage)
         updateInterval = par("updateInterval");
         faceForward = par("faceForward");
     }
+    else if (stage == INITSTAGE_SINGLE_MOBILITY) {
+        scheduleUpdate();
+    }
 }
 
 void MovingMobilityBase::initializeMobilityData()
 {
     MobilityBase::initializeMobilityData();
     lastUpdate = simTime();
-    scheduleUpdate();
 }
 
 void MovingMobilityBase::moveAndUpdate()
