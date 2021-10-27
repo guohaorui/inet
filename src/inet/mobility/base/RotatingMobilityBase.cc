@@ -42,13 +42,10 @@ void RotatingMobilityBase::initialize(int stage)
         rotateTimer = new cMessage("rotate");
         updateInterval = par("updateInterval");
     }
-}
-
-void RotatingMobilityBase::initializeOrientation()
-{
-    MobilityBase::initializeOrientation();
-    lastUpdate = simTime();
-    scheduleUpdate();
+    else if (stage == INITSTAGE_SINGLE_MOBILITY) {
+        lastUpdate = simTime();
+        scheduleUpdate();
+    }
 }
 
 void RotatingMobilityBase::rotateAndUpdate()
