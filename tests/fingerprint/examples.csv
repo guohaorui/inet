@@ -398,14 +398,14 @@
 
 /examples/mobility/,                 -f omnetpp.ini -c AnsimMobility -r 0,          10000s,          72f8-5c0b/tplx;134b-8feb/tpM;3152-f194/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c BonnMotionMobility1 -r 0,    10000s,          ce84-30b6/tplx;24be-793e/tpM;37b9-3297/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c BonnMotionMobility2 -r 0,    10000s,          5e8f-b884/tplx;fcb3-f641/tpM;0000-0000/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c BonnMotionMobility2 -r 0,    10000s,          5e8f-b884/tplx;fcb3-f641/tpM;8012-59ed/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c ChiangMobility -r 0,         10000s,          4b3c-6272/tplx;a960-9b6d/tpM;211b-fa83/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c CircleMobility1 -r 0,        10000s,          910a-0363/tplx;2e07-72ea/tpM;376a-9a6c/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c CircleMobility2 -r 0,        10000s,          910a-0363/tplx;bbd3-69e4/tpM;7b1e-023e/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c GaussMarkovMobility -r 0,    10000s,          4b3c-6272/tplx;7bbf-fb0b/tpM;99dc-e924/tyf, PASS,
 # /examples/mobility/,                 -f omnetpp.ini -c LinearMobility -r 0,       # LinearMobility extended
-/examples/mobility/,                 -f omnetpp.ini -c LinearMobility01 -r 0,       10000s,          4860-beb1/tplx;1df0-5c32/tpM;0bd9-c429/tyf, PASS,
-/examples/mobility/,                 -f omnetpp.ini -c LinearMobility1 -r 0,        10000s,          c433-b32d/tplx;c25f-89c0/tpM;d1e6-3fd6/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c LinearMobility01 -r 0,       10000s,          4860-beb1/tplx;1df0-5c32/tpM;6530-bbc1/tyf, PASS,
+/examples/mobility/,                 -f omnetpp.ini -c LinearMobility1 -r 0,        10000s,          c433-b32d/tplx;c25f-89c0/tpM;d066-3fd6/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c LinearMobility10 -r 0,       10000s,          ecf3-5334/tplx;1ef5-fe81/tpM;48be-12b4/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c LinearMobility100 -r 0,      10000s,          fcd5-da2e/tplx;7800-0f0e/tpM;708b-4121/tyf, PASS,
 /examples/mobility/,                 -f omnetpp.ini -c LinearMobility1000 -r 0,     10000s,          380f-162e/tplx;db8d-1a87/tpM;901c-70f2/tyf, PASS,
@@ -436,7 +436,7 @@
 
 /examples/neighborcache/,            -f omnetpp.ini -c WithoutNeighborCache -r 0,      100s,         cb6c-04f5/tplx;bfd1-84cd/~tNl;d274-f0d2/~tND, PASS, wireless
 /examples/neighborcache/,            -f omnetpp.ini -c QuadTreeNeighborCache -r 0,     100s,         d377-54c9/tplx;801c-c672/~tNl;cf7f-8b68/~tND, PASS, wireless
-/examples/neighborcache/,            -f omnetpp.ini -c NeighborListNeighborCache -r 0, 100s,         dd48-d575/tplx;f1e5-9031/~tNl;341a-7e94/~tND;7ba9-526f/tyf, PASS, wireless
+/examples/neighborcache/,            -f omnetpp.ini -c NeighborListNeighborCache -r 0, 100s,         dd48-d575/tplx;f1e5-9031/~tNl;341a-7e94/~tND;abab-524e/tyf, PASS, wireless
 /examples/neighborcache/,            -f omnetpp.ini -c GridNeighborCache -r 0,         100s,         b1c1-5c62/tplx;3790-656a/~tNl;f69b-c3f2/~tND, PASS, wireless
 
 /examples/objectcache/,              -f omnetpp.ini -c WithoutCache -r 0,           20s,             0aae-3ddc/tplx;c696-9e4b/~tNl;0670-fe16/~tND;5803-498e/tyf, PASS, wireless
@@ -530,7 +530,7 @@
 /examples/wireless/filtering/,       -f omnetpp.ini -c ListeningFilter -r 0,          100s,         946b-6f7f/tplx;e5d7-0ef7/~tNl;5e2b-1edf/~tND;f604-07ee/tyf, PASS,
 /examples/wireless/filtering/,       -f omnetpp.ini -c MacAddressFilter -r 0,         100s,         d2d8-8182/tplx;d14e-6ff1/~tNl;0950-678b/~tND;563c-a06f/tyf, PASS,
 
-/examples/wireless/handover/,        -f omnetpp.ini -c General -r 0,                1500s,        8c08-7cb7/tplx;b423-5880/~tNl;c7a2-95fb/~tND;ab52-4a69/tyf, PASS, wireless
+/examples/wireless/handover/,        -f omnetpp.ini -c General -r 0,                1500s,        8c08-7cb7/tplx;b423-5880/~tNl;c7a2-95fb/~tND;69af-b28e/tyf, PASS, wireless
 
 /examples/wireless/hiddennode/,      -f omnetpp.ini -c General -r 0,                5s,         8383-735e/tplx;8e4d-20ee/~tNl;318e-4afd/~tND;d261-55c9/tyf, PASS, wireless
 
