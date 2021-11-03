@@ -124,6 +124,11 @@ const Coord& MovingMobilityBase::getCurrentVelocity()
     return lastVelocity;
 }
 
+const Coord& MovingMobilityBase::getCurrentAcceleration()
+{
+    return Coord::ZERO;
+}
+
 const Quaternion& MovingMobilityBase::getCurrentAngularPosition()
 {
     moveAndUpdate();
@@ -134,6 +139,11 @@ const Quaternion& MovingMobilityBase::getCurrentAngularVelocity()
 {
     moveAndUpdate();
     return lastAngularVelocity;
+}
+
+const Quaternion& MovingMobilityBase::getCurrentAngularAcceleration()
+{
+    return Quaternion::IDENTITY;
 }
 
 } // namespace inet
