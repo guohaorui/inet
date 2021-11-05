@@ -73,12 +73,12 @@ void MassMobility::processBorderPolicy()
     Quaternion dummyQuaternion(Quaternion::NIL);
 
     if (simTime() == nextChange) {
-        handleIfOutside(borderPolicy, dummyCoord, lastVelocity, dummyAngle, dummyAngle, quaternion, lastOrientation);
+        handleIfOutside(borderPolicy, dummyCoord, lastVelocity, dummyAngle, dummyAngle, quaternion, faceForward ? lastOrientation : dummyQuaternion);
         if (faceForward)
             lastOrientation = quaternion;
     }
     else {
-        handleIfOutside(borderPolicy, dummyCoord, lastVelocity, dummyAngle, dummyAngle, lastOrientation, dummyQuaternion);
+        handleIfOutside(borderPolicy, dummyCoord, lastVelocity, dummyAngle, dummyAngle, faceForward ? lastOrientation : dummyQuaternion, dummyQuaternion);
     }
 }
 
