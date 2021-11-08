@@ -15,6 +15,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+#include "inet/transportlayer/contract/udp/UdpSocket.h"
+
 #include "inet/common/ProtocolTag_m.h"
 #include "inet/common/packet/Message.h"
 #include "inet/common/socket/SocketTag_m.h"
@@ -30,7 +32,6 @@
 
 #include "inet/transportlayer/common/L4PortTag_m.h"
 #include "inet/transportlayer/contract/udp/UdpControlInfo.h"
-#include "inet/transportlayer/contract/udp/UdpSocket.h"
 
 namespace inet {
 
@@ -317,6 +318,10 @@ void UdpSocket::sendToUDP(cMessage *msg)
         throw cRuntimeError("UdpSocket: setOutputGate() must be invoked before socket can be used");
     EV_DEBUG << "Sending to UDP protocol" << EV_FIELD(msg) << EV_ENDL;
     auto& tags = check_and_cast<ITaggedObject *>(msg)->getTags();
+    if (auto dispatchProtocolReq = tags.findTag<DispatchProtocolReq>()) {
+        auto encapsulationProtocolReq = tags.addTagIfAbsent<EncapsulationProtocolReq>();
+        encapsulationProtocolReq->insertProtocols(0, dispatchProtocolReq->getProtocol());
+    }
     tags.addTagIfAbsent<DispatchProtocolReq>()->setProtocol(&Protocol::udp);
     tags.addTagIfAbsent<SocketReq>()->setSocketId(socketId);
     check_and_cast<cSimpleModule *>(gateToUdp->getOwnerModule())->send(msg, gateToUdp);
