@@ -80,8 +80,6 @@
 /examples/ethernet/arptest/,         -f omnetpp.ini -c ARPTest -r 0,                500s,            cdb1-fb49/tplx;47b1-8963/~tNl;7156-c692/~tND;cf32-14eb/tyf, PASS,
 /examples/ethernet/arptest2/,        -f omnetpp.ini -c ARPTest -r 0,                500s,            bbce-8358/tplx;5174-745c/~tNl;3b14-1528/~tND;6332-34bc/tyf, PASS,
 
-/examples/ethernet/creditbasedshaper/, -f omnetpp.ini -c General -r 0,              100ms,           0bc1-642e/tplx;5ab0-6235/~tNl;702f-784c/~tND;2254-06ad/tyf, PASS, tsn
-
 # /examples/ethernet/lans/,            -f .qtenv.ini -c General -r 0
 /examples/ethernet/lans/,            -f bus.ini -c BusLAN -r 0,                     100s,            571e-8c3e/tplx;46eb-2c9e/~tNl;a87b-6a0a/tyf, PASS,
 # /examples/ethernet/lans/,            -f defaults.ini -c General -r 0,               -1s,             0, ERROR,   # not a complete simulations, defaults.ini included by other ini files
@@ -103,9 +101,6 @@
 /examples/ethernet/vlan/,            -f omnetpp.ini -c DoubleTagged -r 0,           10ms,            9878-e0f6/tplx;e0a0-0a56/~tNl;052a-57d9/~tND;942f-97ec/tyf, PASS,
 /examples/ethernet/vlan/,            -f omnetpp.ini -c VirtualInterface -r 0,       10ms,            6488-c4d6/tplx;b725-0790/~tNl;849c-43ea/~tND;4023-18d5/tyf, PASS,
 
-/examples/ethernet/cutthrough/,      -f omnetpp.ini -c General -r 0,                1s,              1dc2-59ef/tplx;4965-16ac/~tNl;6e4f-a0c9/~tND;400e-7648/tyf, PASS, ethernet layered tsn
-/examples/ethernet/preemption/,      -f omnetpp.ini -c General -r 0,                1s,              13c0-0255/tplx;9f0e-e3db/~tNl;6a9a-c7a1/~tND;3408-111e/tyf, PASS, ethernet layered tsn
-/examples/ethernet/gatepreemption/,  -f omnetpp.ini -c General -r 0,                1s,              efab-2d27/tplx;d21b-a25d/~tNl;24be-38d8/~tND;5887-afd8/tyf, PASS, ethernet layered tsn
 
 /examples/ethernet/clocksynchronization/, -f omnetpp.ini -c SynchronizedBySimulationTime -r 0, 10ms, b1aa-0eb7/tplx;772a-528b/~tNl;478a-1ee5/~tND;ae2a-7c1f/tyf, PASS, ethernet layered tsn
 /examples/ethernet/clocksynchronization/, -f omnetpp.ini -c UnsynchronizedClocks -r 0,         10ms, 649e-c5a1/tplx;277f-0e05/~tNl;1d4b-ad82/~tND;0205-9fd9/tyf, PASS, ethernet layered tsn
@@ -502,23 +497,11 @@
 
 /examples/timing/,                   -f omnetpp.ini -c General -r 0,                0.1s,             0029-0683/tplx;2b60-28b2/~tNl;3ad0-14cf/~tND;80ab-0584/tyf, PASS,
 
-/examples/tsn/cutthroughswitching/, -f omnetpp.ini -c StoreAndForward -r 0,                   1s,           0dc0-b53e/tplx;c4e0-e59d/~tNl, PASS, tsn
-/examples/tsn/cutthroughswitching/, -f omnetpp.ini -c CutthroughSwitching -r 0,               1s,           c011-dda7/tplx;e277-badb/~tNl, PASS, tsn
-
 /examples/tsn/gatescheduling/,      -f omnetpp.ini -c AlwaysOpen -r 0,                        0.1s,         32dc-7153/tplx;e0dd-1ced/~tNl, PASS, tsn
 /examples/tsn/gatescheduling/,      -f omnetpp.ini -c Simple -r 0,                            0.1s,         bbb3-bb08/tplx;a866-b601/~tNl, PASS, tsn
 /examples/tsn/gatescheduling/,      -f omnetpp.ini -c SAT -r 0,                               0.1s,         00d8-10f6/tplx;0e53-8cb5/~tNl, PASS, tsn
 /examples/tsn/gatescheduling/,      -f omnetpp.ini -c TSNsched -r 0,                          0.1s,         bef8-c047/tplx;7bc2-a615/~tNl, PASS, tsn
 
-/examples/tsn/framepreemption/,     -f omnetpp.ini -c NormalOperation -r 0,                   1s,           2f6c-38ce/tplx;7314-623a/~tNl, PASS, tsn
-/examples/tsn/framepreemption/,     -f omnetpp.ini -c FramePreemption -r 0,                   1s,           7133-d0bf/tplx;94ac-5c45/~tNl, PASS, tsn
-
-/examples/tsn/framereplication/,    -f omnetpp.ini -c ManualRedundancy -r 0,                  1s,           6505-7983/tplx;2a58-52f2/~tNl, PASS, tsn
-/examples/tsn/framereplication/,    -f omnetpp.ini -c StreamRedundancyConfigurator -r 0,      1s,           6505-7983/tplx;2a58-52f2/~tNl, PASS, tsn
-/examples/tsn/framereplication/,    -f omnetpp.ini -c TsnConfigurator -r 0,                   10s,          bcde-1c93/tplx;5ba1-806c/~tNl, PASS, tsn
-
-/examples/tsn/streamfiltering/,     -f omnetpp.ini -c SingleRateTwoColorMeter -r 0,           2s,           77ff-afe0/tplx;565b-5dab/~tNl, PASS, tsn
-/examples/tsn/streamfiltering/,     -f omnetpp.ini -c SlidingWindowRateMeter -r 0,            2s,           3573-d16a/tplx;2d67-77b9/~tNl, PASS, tsn
 
 /examples/tsn/timesynchronization/, -f omnetpp.ini -c OneMasterOneSyncDomain -r 0,            4s,           3f2b-c35c/tplx;60f4-76f9/~tNl, PASS, tsn
 /examples/tsn/timesynchronization/, -f omnetpp.ini -c TwoMastersOneSyncDomain -r 0,           4s,           f84f-8ec7/tplx;ae89-08f3/~tNl, PASS, tsn
@@ -526,10 +509,6 @@
 /examples/tsn/timesynchronization/, -f omnetpp.ini -c NormalOperation -r 0,                   4s,           2d2c-972c/tplx;0f0e-ab05/~tNl, PASS, tsn
 /examples/tsn/timesynchronization/, -f omnetpp.ini -c LinkFailure -r 0,                       4s,           cbab-c78a/tplx;fd17-26a0/~tNl, PASS, tsn
 /examples/tsn/timesynchronization/, -f omnetpp.ini -c Failover -r 0,                          4s,           e585-37db/tplx;a85a-c103/~tNl, PASS, tsn
-
-/examples/tsn/trafficshaping/,      -f omnetpp.ini -c CreditBasedShaper -r 0,                 0.1s,         a82d-5644/tplx;9d42-80ec/~tNl, PASS, tsn
-/examples/tsn/trafficshaping/,      -f omnetpp.ini -c TimeAwareShaper -r 0,                   0.1s,         9eba-eb83/tplx;62f5-72bc/~tNl, PASS, tsn
-/examples/tsn/trafficshaping/,      -f omnetpp.ini -c AsynchronousShaper -r 0,                0.1s,         6606-5127/tplx;fb46-e9e1/~tNl, PASS, tsn
 
 /examples/voip/,                     -f omnetpp.ini -c GoodChannel -r 0,            200s,            635a-0571/tplx;8bed-195e/~tNl;15ad-3e8a/tyf, PASS,
 /examples/voip/,                     -f omnetpp.ini -c BadChannel -r 0,             200s,            eb50-fbaa/tplx;be78-aee4/~tNl;3a74-1a78/tyf, PASS,
