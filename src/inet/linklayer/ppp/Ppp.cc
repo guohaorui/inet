@@ -37,18 +37,34 @@ Define_Module(Ppp);
 simsignal_t Ppp::transmissionStateChangedSignal = registerSignal("transmissionStateChanged");
 simsignal_t Ppp::rxPkOkSignal = registerSignal("rxPkOk");
 
+Ppp::Ppp()
+{
+}
+
 Ppp::~Ppp()
 {
+    delete currentTxFrame;
+    if (hostModule)
+        hostModule->unsubscribe(interfaceDeletedSignal, this);
     cancelAndDelete(endTransmissionEvent);
     delete curTxPacket;
 }
 
 void Ppp::initialize(int stage)
 {
-    MacProtocolBase::initialize(stage);
+    LayeredProtocolBase::initialize(stage);
 
     // all initialization is done in the first stage
     if (stage == INITSTAGE_LOCAL) {
+        currentTxFrame = nullptr;
+        upperLayerInGateId = findGate("upperLayerIn");
+        upperLayerOutGateId = findGate("upperLayerOut");
+        lowerLayerInGateId = findGate("lowerLayerIn");
+        lowerLayerOutGateId = findGate("lowerLayerOut");
+        hostModule = findContainingNode(this);
+        if (hostModule)
+            hostModule->subscribe(interfaceDeletedSignal, this);
+
         displayStringTextFormat = par("displayStringTextFormat");
         sendRawBytes = par("sendRawBytes");
         endTransmissionEvent = new cMessage("pppEndTxEvent");
@@ -73,6 +89,9 @@ void Ppp::initialize(int stage)
         emit(transmissionStateChangedSignal, 0L);
 
         txQueue = check_and_cast<queueing::IPacketQueue *>(getSubmodule("queue"));
+    }
+    else if (stage == INITSTAGE_NETWORK_INTERFACE_CONFIGURATION) {
+        registerInterface();
     }
 }
 
@@ -101,7 +120,10 @@ void Ppp::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, 
 {
     Enter_Method("%s", cComponent::getSignalName(signalID));
 
-    MacProtocolBase::receiveSignal(source, signalID, obj, details);
+    if (signalID == interfaceDeletedSignal) {
+        if (networkInterface == check_and_cast<const NetworkInterface *>(obj))
+            networkInterface = nullptr;
+    }
 
     if (getSimulation()->getSimulationStage() == CTX_CLEANUP)
         return;
@@ -208,7 +230,7 @@ void Ppp::startTransmitting()
 
 void Ppp::handleMessageWhenUp(cMessage *message)
 {
-    MacProtocolBase::handleMessageWhenUp(message);
+    LayeredProtocolBase::handleMessageWhenUp(message);
     if (operationalState == State::STOPPING_OPERATION) {
         if (txQueue->isEmpty()) {
             networkInterface->setCarrier(false);
@@ -288,7 +310,7 @@ void Ppp::handleLowerPacket(Packet *packet)
 
 void Ppp::refreshDisplay() const
 {
-    MacProtocolBase::refreshDisplay();
+    LayeredProtocolBase::refreshDisplay();
 
     if (displayStringTextFormat != nullptr) {
         auto text = StringFormat::formatString(displayStringTextFormat, [&] (char directive) {
@@ -376,6 +398,115 @@ void Ppp::handleStopOperation(LifecycleOperation *operation)
         networkInterface->setState(NetworkInterface::State::DOWN);
         startActiveOperationExtraTimeOrFinish(par("stopOperationExtraTime"));
     }
+}
+
+MacAddress Ppp::parseMacAddressParameter(const char *addrstr)
+{
+    MacAddress address;
+
+    if (!strcmp(addrstr, "auto"))
+        // assign automatic address
+        address = MacAddress::generateAutoAddress();
+    else
+        address.setAddress(addrstr);
+
+    return address;
+}
+
+void Ppp::registerInterface()
+{
+    ASSERT(networkInterface == nullptr);
+    networkInterface = getContainingNicModule(this);
+    configureNetworkInterface();
+}
+
+void Ppp::sendUp(cMessage *message)
+{
+    if (message->isPacket())
+        emit(packetSentToUpperSignal, message);
+    send(message, upperLayerOutGateId);
+}
+
+void Ppp::sendDown(cMessage *message)
+{
+    if (message->isPacket())
+        emit(packetSentToLowerSignal, message);
+    send(message, lowerLayerOutGateId);
+}
+
+bool Ppp::isUpperMessage(cMessage *message)
+{
+    return message->getArrivalGateId() == upperLayerInGateId;
+}
+
+bool Ppp::isLowerMessage(cMessage *message)
+{
+    return message->getArrivalGateId() == lowerLayerInGateId;
+}
+
+void Ppp::deleteCurrentTxFrame()
+{
+    delete currentTxFrame;
+    currentTxFrame = nullptr;
+}
+
+void Ppp::dropCurrentTxFrame(PacketDropDetails& details)
+{
+    emit(packetDroppedSignal, currentTxFrame, &details);
+    delete currentTxFrame;
+    currentTxFrame = nullptr;
+}
+
+void Ppp::popTxQueue()
+{
+    if (currentTxFrame != nullptr)
+        throw cRuntimeError("Model error: incomplete transmission exists");
+    ASSERT(txQueue != nullptr);
+    currentTxFrame = txQueue->dequeuePacket();
+    currentTxFrame->setArrival(getId(), upperLayerInGateId, simTime());
+    take(currentTxFrame);
+}
+
+void Ppp::flushQueue(PacketDropDetails& details)
+{
+    // code would look slightly nicer with a pop() function that returns nullptr if empty
+    if (txQueue)
+        while (!txQueue->isEmpty()) {
+            auto packet = txQueue->dequeuePacket();
+            emit(packetDroppedSignal, packet, &details); // FIXME this signal lumps together packets from the network and packets from higher layers! separate them
+            delete packet;
+        }
+}
+
+void Ppp::clearQueue()
+{
+    if (txQueue)
+        while (!txQueue->isEmpty())
+            delete txQueue->dequeuePacket();
+}
+
+void Ppp::handleMessageWhenDown(cMessage *msg)
+{
+    if (!msg->isSelfMessage() && msg->getArrivalGateId() == lowerLayerInGateId) {
+        EV << "Interface is turned off, dropping packet\n";
+        delete msg;
+    }
+    else
+        LayeredProtocolBase::handleMessageWhenDown(msg);
+}
+
+void Ppp::handleStartOperation(LifecycleOperation *operation)
+{
+    networkInterface->setState(NetworkInterface::State::UP);
+    networkInterface->setCarrier(true);
+}
+
+void Ppp::handleCrashOperation(LifecycleOperation *operation)
+{
+    deleteCurrentTxFrame();
+    clearQueue();
+    networkInterface->setCarrier(false);
+    networkInterface->setState(NetworkInterface::State::DOWN);
 }
 
 } // namespace inet

@@ -32,9 +32,27 @@ class NetworkInterface;
 /**
  * PPP implementation.
  */
-class INET_API Ppp : public MacProtocolBase
+class INET_API Ppp : public LayeredProtocolBase, public cListener
 {
   protected:
+    /** @brief Gate ids */
+    //@{
+    int upperLayerInGateId = -1;
+    int upperLayerOutGateId = -1;
+    int lowerLayerInGateId = -1;
+    int lowerLayerOutGateId = -1;
+    //@}
+
+    NetworkInterface *networkInterface = nullptr;
+
+    /** Currently transmitted frame if any */
+    Packet *currentTxFrame = nullptr;
+
+    /** Messages received from upper layer and to be transmitted later */
+    opp_component_ptr<queueing::IPacketQueue> txQueue;
+
+    cModule *hostModule = nullptr;
+
     const char *displayStringTextFormat = nullptr;
     bool sendRawBytes = false;
     cGate *physOutGate = nullptr;
@@ -67,9 +85,10 @@ class INET_API Ppp : public MacProtocolBase
     virtual void receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, cObject *details) override;
 
     // MacBase functions
-    virtual void configureNetworkInterface() override;
+    virtual void configureNetworkInterface();
 
   public:
+    Ppp();
     virtual ~Ppp();
 
   protected:
@@ -79,7 +98,40 @@ class INET_API Ppp : public MacProtocolBase
     virtual void handleSelfMessage(cMessage *message) override;
     virtual void handleUpperPacket(Packet *packet) override;
     virtual void handleLowerPacket(Packet *packet) override;
+    virtual void handleStartOperation(LifecycleOperation *operation) override;
     virtual void handleStopOperation(LifecycleOperation *operation) override;
+    virtual void handleCrashOperation(LifecycleOperation *operation) override;
+
+    virtual void registerInterface();
+
+    virtual MacAddress parseMacAddressParameter(const char *addrstr);
+
+    virtual void sendUp(cMessage *message);
+    virtual void sendDown(cMessage *message);
+
+    virtual bool isUpperMessage(cMessage *message) override;
+    virtual bool isLowerMessage(cMessage *message) override;
+
+    virtual bool isInitializeStage(int stage) override { return stage == INITSTAGE_LINK_LAYER; }
+    virtual bool isModuleStartStage(int stage) override { return stage == ModuleStartOperation::STAGE_LINK_LAYER; }
+    virtual bool isModuleStopStage(int stage) override { return stage == ModuleStopOperation::STAGE_LINK_LAYER; }
+
+    virtual void deleteCurrentTxFrame();
+    virtual void dropCurrentTxFrame(PacketDropDetails& details);
+    virtual void popTxQueue();
+
+    /**
+     * should clear queue and emit signal "packetDropped" with entire packets
+     */
+    virtual void flushQueue(PacketDropDetails& details);
+
+    /**
+     * should clear queue silently
+     */
+    virtual void clearQueue();
+
+    using cListener::receiveSignal;
+    virtual void handleMessageWhenDown(cMessage *msg) override;
 };
 
 } // namespace inet
