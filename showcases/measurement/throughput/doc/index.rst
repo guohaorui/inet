@@ -46,7 +46,7 @@ Here are the results:
 .. figure:: media/throughput.png
    :align: center
 
-**TODO** is there an emitting frequency?
+The frequency of data points is denser than 0.1s, so the statistic is emitted more frequently, after 100 packets.
 
 Sources: :download:`omnetpp.ini <../omnetpp.ini>`, :download:`ChannelThroughputMeasurementShowcase.ned <../ChannelThroughputMeasurementShowcase.ned>`
 
