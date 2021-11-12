@@ -43,7 +43,7 @@ class INET_API Ppp : public LayeredProtocolBase, public cListener
     int lowerLayerOutGateId = -1;
     //@}
 
-    NetworkInterface *networkInterface = nullptr;
+    opp_component_ptr<NetworkInterface> networkInterface;
 
     /** Currently transmitted frame if any */
     Packet *currentTxFrame = nullptr;

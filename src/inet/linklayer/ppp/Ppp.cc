@@ -44,8 +44,6 @@ Ppp::Ppp()
 Ppp::~Ppp()
 {
     delete currentTxFrame;
-    if (hostModule)
-        hostModule->unsubscribe(interfaceDeletedSignal, this);
     cancelAndDelete(endTransmissionEvent);
     delete curTxPacket;
 }
@@ -62,8 +60,6 @@ void Ppp::initialize(int stage)
         lowerLayerInGateId = findGate("lowerLayerIn");
         lowerLayerOutGateId = findGate("lowerLayerOut");
         hostModule = findContainingNode(this);
-        if (hostModule)
-            hostModule->subscribe(interfaceDeletedSignal, this);
 
         displayStringTextFormat = par("displayStringTextFormat");
         sendRawBytes = par("sendRawBytes");
@@ -119,11 +115,6 @@ void Ppp::configureNetworkInterface()
 void Ppp::receiveSignal(cComponent *source, simsignal_t signalID, cObject *obj, cObject *details)
 {
     Enter_Method("%s", cComponent::getSignalName(signalID));
-
-    if (signalID == interfaceDeletedSignal) {
-        if (networkInterface == check_and_cast<const NetworkInterface *>(obj))
-            networkInterface = nullptr;
-    }
 
     if (getSimulation()->getSimulationStage() == CTX_CLEANUP)
         return;
