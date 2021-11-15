@@ -357,6 +357,7 @@ Udp::SockDesc *Udp::createSocket(int sockId, const L3Address& localAddr, int loc
 {
     // create and fill in SockDesc
     SockDesc *sd = new SockDesc(sockId);
+    sd->multicastLoop = par("defaultMulticastLoop");
     sd->isBound = false;
     sd->localAddr = localAddr;
     sd->localPort = localPort == -1 ? getEphemeralPort() : localPort;
@@ -1448,8 +1449,8 @@ std::ostream& operator<<(std::ostream& os, const Udp::SockDesc& sd)
         os << " remoteAddr=" << sd.remoteAddr;
     if (sd.multicastOutputInterfaceId != -1)
         os << " interfaceId=" << sd.multicastOutputInterfaceId;
-    if (sd.multicastLoop != DEFAULT_MULTICAST_LOOP)
-        os << " multicastLoop=" << sd.multicastLoop;
+//    if (sd.multicastLoop != par("defaultMulticastLoop"))
+//        os << " multicastLoop=" << sd.multicastLoop;
 
     return os;
 }
