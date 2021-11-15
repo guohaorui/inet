@@ -442,16 +442,6 @@ void Ppp::dropCurrentTxFrame(PacketDropDetails& details)
     currentTxFrame = nullptr;
 }
 
-void Ppp::popTxQueue()
-{
-    if (currentTxFrame != nullptr)
-        throw cRuntimeError("Model error: incomplete transmission exists");
-    ASSERT(txQueue != nullptr);
-    currentTxFrame = txQueue->dequeuePacket();
-    currentTxFrame->setArrival(getId(), upperLayerInGateId, simTime());
-    take(currentTxFrame);
-}
-
 void Ppp::flushQueue(PacketDropDetails& details)
 {
     // code would look slightly nicer with a pop() function that returns nullptr if empty
