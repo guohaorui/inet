@@ -374,7 +374,7 @@ void Ppp::decapsulate(Packet *packet)
 
 void Ppp::handleStopOperation(LifecycleOperation *operation)
 {
-    if (!txQueue->isEmpty()) {
+    if (currentTxFrame || !txQueue->isEmpty()) {
         networkInterface->setState(NetworkInterface::State::GOING_DOWN);
         delayActiveOperationFinish(par("stopOperationTimeout"));
     }
