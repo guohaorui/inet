@@ -23,6 +23,7 @@
 #include "inet/common/packet/Packet.h"
 #include "inet/linklayer/base/MacProtocolBase.h"
 #include "inet/linklayer/ppp/PppFrame_m.h"
+#include "inet/queueing/contract/IActivePacketSink.h"
 #include "inet/queueing/contract/IPacketQueue.h"
 
 namespace inet {
@@ -32,7 +33,7 @@ class NetworkInterface;
 /**
  * PPP implementation.
  */
-class INET_API Ppp : public LayeredProtocolBase, public cListener
+class INET_API Ppp : public LayeredProtocolBase, public cListener, public queueing::IActivePacketSink
 {
   protected:
     /** @brief Gate ids */
@@ -48,7 +49,6 @@ class INET_API Ppp : public LayeredProtocolBase, public cListener
     /** Currently transmitted frame if any */
     Packet *currentTxFrame = nullptr;
 
-    /** Messages received from upper layer and to be transmitted later */
     opp_component_ptr<queueing::IPacketQueue> txQueue;
 
     cModule *hostModule = nullptr;
@@ -118,20 +118,25 @@ class INET_API Ppp : public LayeredProtocolBase, public cListener
 
     virtual void deleteCurrentTxFrame();
     virtual void dropCurrentTxFrame(PacketDropDetails& details);
-    virtual void popTxQueue();
 
     /**
      * should clear queue and emit signal "packetDropped" with entire packets
      */
     virtual void flushQueue(PacketDropDetails& details);
 
-    /**
-     * should clear queue silently
-     */
-    virtual void clearQueue();
-
     using cListener::receiveSignal;
     virtual void handleMessageWhenDown(cMessage *msg) override;
+
+  protected:
+    virtual bool canProcessUpperPacket() const;
+    virtual void processUpperPacket();
+    virtual void tryProcessUpperPackets();
+
+  public:
+    // IActivePacketSink:
+    virtual queueing::IPassivePacketSource *getProvider(cGate *gate) override;
+    virtual void handleCanPullPacketChanged(cGate *gate) override;
+    virtual void handlePullPacketProcessed(Packet *packet, cGate *gate, bool successful) override;
 };
 
 } // namespace inet

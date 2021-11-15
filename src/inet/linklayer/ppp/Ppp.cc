@@ -84,7 +84,7 @@ void Ppp::initialize(int stage)
         subscribe(POST_MODEL_CHANGE, this);
         emit(transmissionStateChangedSignal, 0L);
 
-        txQueue = check_and_cast<queueing::IPacketQueue *>(getSubmodule("queue"));
+        txQueue = getConnectedModule<queueing::IPacketQueue>(gate(upperLayerInGateId));
     }
     else if (stage == INITSTAGE_NETWORK_INTERFACE_CONFIGURATION) {
         registerInterface();
@@ -183,9 +183,8 @@ void Ppp::refreshOutGateConnection(bool connected)
         networkInterface->setDatarate(datarate);
     }
 
-    if (connected && !endTransmissionEvent->isScheduled() && !txQueue->isEmpty()) {
-        popTxQueue();
-        startTransmitting();
+    if (connected && !endTransmissionEvent->isScheduled()) {
+        tryProcessUpperPackets();
     }
 }
 
@@ -240,10 +239,7 @@ void Ppp::handleSelfMessage(cMessage *message)
         // Transmission finished, we can start next one.
         EV_INFO << "Transmission successfully completed.\n";
         emit(transmissionStateChangedSignal, 0L);
-        if (!txQueue->isEmpty()) {
-            popTxQueue();
-            startTransmitting();
-        }
+        tryProcessUpperPackets();
     }
     else
         throw cRuntimeError("Unknown self message");
@@ -261,11 +257,9 @@ void Ppp::handleUpperPacket(Packet *packet)
         delete packet;
         return;
     }
-    txQueue->enqueuePacket(packet);
-    if (!endTransmissionEvent->isScheduled() && !txQueue->isEmpty()) {
-        popTxQueue();
-        startTransmitting();
-    }
+    ASSERT(currentTxFrame == nullptr);
+    currentTxFrame = packet;
+    startTransmitting();
 }
 
 void Ppp::handleLowerPacket(Packet *packet)
@@ -469,12 +463,6 @@ void Ppp::flushQueue(PacketDropDetails& details)
         }
 }
 
-void Ppp::clearQueue()
-{
-    if (txQueue)
-        while (!txQueue->isEmpty())
-            delete txQueue->dequeuePacket();
-}
 
 void Ppp::handleMessageWhenDown(cMessage *msg)
 {
@@ -495,9 +483,71 @@ void Ppp::handleStartOperation(LifecycleOperation *operation)
 void Ppp::handleCrashOperation(LifecycleOperation *operation)
 {
     deleteCurrentTxFrame();
-    clearQueue();
     networkInterface->setCarrier(false);
     networkInterface->setState(NetworkInterface::State::DOWN);
+}
+
+/**
+ * Returns the passive packet source from where packets are pulled or nullptr
+ * if the connected module doesn't implement the interface.
+ *
+ * The gate parameter must be a valid gate of this module.
+ */
+queueing::IPassivePacketSource *Ppp::getProvider(cGate *gate)
+{
+    return (gate->getId() == upperLayerInGateId) ? txQueue.get() : nullptr;
+}
+
+/**
+ * Notifies about a change in the possibility of pulling some packet from
+ * the passive packet source at the given gate.
+ *
+ * This method is called, for example, when a new packet is inserted into
+ * a queue. It allows the sink to pull a new packet from the queue.
+ *
+ * The gate parameter must be a valid gate of this module.
+ */
+void Ppp::handleCanPullPacketChanged(cGate *gate)
+{
+    Enter_Method("handleCanPullPacketChanged");
+    tryProcessUpperPackets();
+}
+
+/**
+ * Notifies about the completion of the packet processing for a packet that
+ * was pulled earlier independently whether the packet is passed or streamed.
+ *
+ * This method is called, for example, when a previously pulled packet is
+ * failed to be processed successfully. It allows the sink to retry the
+ * operation.
+ *
+ * The gate parameter must be a valid gate of this module. The packet must
+ * not be nullptr.
+ */
+void Ppp::handlePullPacketProcessed(Packet *packet, cGate *gate, bool successful)
+{
+    Enter_Method("handlePullPacketProcessed");
+    tryProcessUpperPackets();
+}
+
+bool Ppp::canProcessUpperPacket() const
+{
+    return (!endTransmissionEvent->isScheduled()    // not an active transmission
+            && txQueue->canPullSomePacket(gate(upperLayerInGateId)->getPathStartGate())
+            );
+}
+
+void Ppp::processUpperPacket()
+{
+    auto packet = txQueue->pullPacket(gate(upperLayerInGateId)->getPathStartGate());
+    take(packet);
+    handleUpperPacket(packet);
+}
+
+void Ppp::tryProcessUpperPackets()
+{
+    while (canProcessUpperPacket())
+        processUpperPacket();
 }
 
 } // namespace inet
