@@ -93,7 +93,7 @@ sim-time-limit = 100s
 **.wlan[*].bitrate = 2Mbps
 
 **.wlan[*].mac.address = "auto"
-**.wlan[*].mac.queue.packetCapacity = 14
+**.wlan[*].queue.packetCapacity = 14
 **.wlan[*].mac.rtsThresholdBytes = 3000B
 
 **.wlan[*].radio.transmitter.power = 2mW
