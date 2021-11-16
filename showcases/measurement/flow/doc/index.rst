@@ -156,11 +156,11 @@ The following is a screenshot showing the five defined packet flows in action:
 
 .. **TODO** kliensek kozott az appok kozotti traffic; switchek kozott minden -> amit szeretnenk merni
 
-Let's see how we set up these flows. The UDP apps in the clients and servers are the :ned:`UdpApp` type, i.e. the modular UDP app. This module has an optional ``outbound`` submodule that we can specify in the .INI file to be a :ned:`FlowMeasurementStarter` in the clients:
+Let's see how we set up these flows. The UDP apps in the clients and servers are the :ned:`UdpSourceApp` and :ned:`UdpSinkApp` type, which are versions of the modular :ned:`UdpApp` suitable only to work as a packet source or sink, respectively. These modules have optional ``measurementStarter`` and ``measurementRecorder`` submodules that we can enable in the .INI file. We enable the measurement starter (by setting its type to :ned:`FlowMeasurementStarter`) in the clients:
 
 .. literalinclude:: ../omnetpp.ini
-   :start-at: *.client1.app[*].outbound.typename = "FlowMeasurementStarter"
-   :end-at: *.client1.app[*].outbound.typename = "FlowMeasurementStarter"
+   :start-at: *.client*.app[*].measurementStarter.typename = "FlowMeasurementStarter"
+   :end-at: *.client*.app[*].measurementStarter.typename = "FlowMeasurementStarter"
    :language: ini
 
 Here is the :ned:`FlowMeasurementStarter` in the UDP app:
@@ -170,11 +170,11 @@ Here is the :ned:`FlowMeasurementStarter` in the UDP app:
 
    Figure X. :ned:`FlowMeasurementStarter` in UDP app
 
-Similarly, we specify the inbound module in the server UDP apps to be a :ned:`FlowMeasurementRecorder`:
+Similarly, we enable the measurement recorder module in the server UDP apps (by setting their type to :ned:`FlowMeasurementRecorder`):
 
 .. literalinclude:: ../omnetpp.ini
-   :start-at: *.server1.app[*].inbound.typename = "FlowMeasurementRecorder"
-   :end-at: *.server1.app[*].inbound.typename = "FlowMeasurementRecorder"
+   :start-at: *.server*.app[*].measurementRecorder.typename = "FlowMeasurementRecorder"
+   :end-at: *.server*.app[*].measurementRecorder.typename = "FlowMeasurementRecorder"
    :language: ini
 
 For the packet flow between the two switches, we can enable the built-in ``measurementLayer`` submodule of :ned:`EthernetInterface`:

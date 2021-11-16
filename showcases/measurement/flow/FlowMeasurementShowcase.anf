@@ -6,8 +6,7 @@
     </inputs>
     <charts>
         <chart icon="icons/full/obj/histogramchart.png" id="7" name="Server2, Queueing time, histograms (by name)" template="histogramchart_native" type="HISTOGRAM">
-            <script>
-                <![CDATA[from omnetpp.scave import results, chart, utils, plot
+            <script><![CDATA[from omnetpp.scave import results, chart, utils, ideplot
 
 # get chart properties
 props = chart.get_properties()
@@ -29,10 +28,8 @@ utils.postconfigure_plot(props)
 
 utils.export_image_if_needed(props)
 utils.export_data_if_needed(df, props)
-]]>
-            </script>
-            <dialogPage id="Input" label="Input">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></script>
+            <dialogPage id="Input" label="Input"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
   <import xmlns="http://sweet_swt.sf.net/xswt">
     <package name="java.lang" />
@@ -49,10 +46,8 @@ utils.export_data_if_needed(df, props)
     </styledText>
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Histogram" label="Histogram">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Histogram" label="Histogram"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -111,10 +106,8 @@ Show over_underflow cell?
     </group>
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Plot" label="Plot">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Plot" label="Plot"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -275,10 +268,8 @@ Show over_underflow cell?
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Styling" label="Styling">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Styling" label="Styling"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -388,10 +379,8 @@ Show over_underflow cell?
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Advanced" label="Advanced">
-                <![CDATA[<?xml version='1.0' encoding='UTF-8'?>
+]]></dialogPage>
+            <dialogPage id="Advanced" label="Advanced"><![CDATA[<?xml version='1.0' encoding='UTF-8'?>
 <xswt xmlns:x='http://sweet_swt.sf.net/xswt'>
   <import xmlns='http://sweet_swt.sf.net/xswt'>
     <package name='java.lang'/>
@@ -410,10 +399,8 @@ Show over_underflow cell?
     </styledText>
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Export" label="Export">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Export" label="Export"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -468,8 +455,7 @@ Show over_underflow cell?
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
+]]></dialogPage>
             <property name="grid_show" value="true"/>
             <property name="legend_labels" value="result titles"/>
             <property name="Plot.Caching" value="true"/>
@@ -495,7 +481,7 @@ Show over_underflow cell?
             <property name="image_export_filename" value=""/>
             <property name="cumulative" value="false"/>
             <property name="xaxis_min" value=""/>
-            <property name="filter" value="module =~ &quot;*.inbound&quot; AND&#10;(runattr:experiment =~ Basic AND module =~ &quot;*.server2.app[0].inbound&quot; AND name =~ &quot;c1s2:meanTotalBitQueueingTimePerPacket:histogram&quot; OR &#10; runattr:experiment =~ Basic AND module =~ &quot;*.server2.app[0].inbound&quot; AND name =~ &quot;c2s2:meanTotalBitQueueingTimePerPacket:histogram&quot;)"/>
+            <property name="filter" value="(runattr:experiment =~ Basic AND module =~ &quot;*.server2.app[0].measurementRecorder&quot; AND name =~ &quot;c1s2:meanTotalBitQueueingTimePerPacket:histogram&quot; OR &#10; runattr:experiment =~ Basic AND module =~ &quot;*.server2.app[0].measurementRecorder&quot; AND name =~ &quot;c2s2:meanTotalBitQueueingTimePerPacket:histogram&quot;)"/>
             <property name="X.Label.Wrap" value="true"/>
             <property name="drawstyle" value="Solid"/>
             <property name="show_overflows" value="true"/>
@@ -506,8 +492,7 @@ Show over_underflow cell?
             <property name="image_export_width" value="6"/>
         </chart>
         <chart icon="icons/full/obj/histogramchart.png" id="5" name="Server1, Queueing time, histograms (by name)" template="histogramchart_native" type="HISTOGRAM">
-            <script>
-                <![CDATA[from omnetpp.scave import results, chart, utils, plot
+            <script><![CDATA[from omnetpp.scave import results, chart, utils, plot
 
 # get chart properties
 props = chart.get_properties()
@@ -529,10 +514,8 @@ utils.postconfigure_plot(props)
 
 utils.export_image_if_needed(props)
 utils.export_data_if_needed(df, props)
-]]>
-            </script>
-            <dialogPage id="Input" label="Input">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></script>
+            <dialogPage id="Input" label="Input"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
   <import xmlns="http://sweet_swt.sf.net/xswt">
     <package name="java.lang" />
@@ -549,10 +532,8 @@ utils.export_data_if_needed(df, props)
     </styledText>
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Histogram" label="Histogram">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Histogram" label="Histogram"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -611,10 +592,8 @@ Show over_underflow cell?
     </group>
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Plot" label="Plot">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Plot" label="Plot"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -775,10 +754,8 @@ Show over_underflow cell?
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Styling" label="Styling">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Styling" label="Styling"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -888,10 +865,8 @@ Show over_underflow cell?
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Advanced" label="Advanced">
-                <![CDATA[<?xml version='1.0' encoding='UTF-8'?>
+]]></dialogPage>
+            <dialogPage id="Advanced" label="Advanced"><![CDATA[<?xml version='1.0' encoding='UTF-8'?>
 <xswt xmlns:x='http://sweet_swt.sf.net/xswt'>
   <import xmlns='http://sweet_swt.sf.net/xswt'>
     <package name='java.lang'/>
@@ -910,10 +885,8 @@ Show over_underflow cell?
     </styledText>
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Export" label="Export">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Export" label="Export"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -968,8 +941,7 @@ Show over_underflow cell?
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
+]]></dialogPage>
             <property name="grid_show" value="true"/>
             <property name="legend_labels" value="result titles"/>
             <property name="Plot.Caching" value="true"/>
@@ -995,7 +967,7 @@ Show over_underflow cell?
             <property name="image_export_filename" value=""/>
             <property name="cumulative" value="false"/>
             <property name="xaxis_min" value=""/>
-            <property name="filter" value="module =~ &quot;*.inbound&quot; AND (&#10;runattr:experiment =~ Basic AND module =~ &quot;*.server1.app[0].inbound&quot; AND name =~ &quot;c1s1:meanTotalBitQueueingTimePerPacket:histogram&quot; OR &#10;runattr:experiment =~ Basic AND module =~ &quot;*.server1.app[0].inbound&quot; AND name =~ &quot;c2s1:meanTotalBitQueueingTimePerPacket::histogram&quot;)"/>
+            <property name="filter" value="runattr:experiment =~ Basic AND module =~ &quot;*.server1.app[0].measurementRecorder&quot; AND name =~ &quot;c1s1:meanTotalBitQueueingTimePerPacket:histogram&quot; OR &#10;runattr:experiment =~ Basic AND module =~ &quot;*.server1.app[0].measurementRecorder&quot; AND name =~ &quot;c2s1:meanTotalBitQueueingTimePerPacket::histogram&quot;"/>
             <property name="X.Label.Wrap" value="true"/>
             <property name="drawstyle" value="Solid"/>
             <property name="show_overflows" value="true"/>
@@ -1006,8 +978,7 @@ Show over_underflow cell?
             <property name="image_export_width" value="6"/>
         </chart>
         <chart icon="icons/full/obj/histogramchart.png" id="6" name="Switch2, Queueing time, histograms (by title)" template="histogramchart_native" type="HISTOGRAM">
-            <script>
-                <![CDATA[from omnetpp.scave import results, chart, utils, plot
+            <script><![CDATA[from omnetpp.scave import results, chart, utils, plot
 
 # get chart properties
 props = chart.get_properties()
@@ -1029,10 +1000,8 @@ utils.postconfigure_plot(props)
 
 utils.export_image_if_needed(props)
 utils.export_data_if_needed(df, props)
-]]>
-            </script>
-            <dialogPage id="Input" label="Input">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></script>
+            <dialogPage id="Input" label="Input"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
   <import xmlns="http://sweet_swt.sf.net/xswt">
     <package name="java.lang" />
@@ -1049,10 +1018,8 @@ utils.export_data_if_needed(df, props)
     </styledText>
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Histogram" label="Histogram">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Histogram" label="Histogram"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -1111,10 +1078,8 @@ Show over_underflow cell?
     </group>
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Plot" label="Plot">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Plot" label="Plot"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -1275,10 +1240,8 @@ Show over_underflow cell?
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Styling" label="Styling">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Styling" label="Styling"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -1388,10 +1351,8 @@ Show over_underflow cell?
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Advanced" label="Advanced">
-                <![CDATA[<?xml version='1.0' encoding='UTF-8'?>
+]]></dialogPage>
+            <dialogPage id="Advanced" label="Advanced"><![CDATA[<?xml version='1.0' encoding='UTF-8'?>
 <xswt xmlns:x='http://sweet_swt.sf.net/xswt'>
   <import xmlns='http://sweet_swt.sf.net/xswt'>
     <package name='java.lang'/>
@@ -1410,10 +1371,8 @@ Show over_underflow cell?
     </styledText>
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Export" label="Export">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Export" label="Export"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -1468,8 +1427,7 @@ Show over_underflow cell?
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
+]]></dialogPage>
             <property name="grid_show" value="true"/>
             <property name="legend_labels" value="result titles"/>
             <property name="Plot.Caching" value="true"/>
