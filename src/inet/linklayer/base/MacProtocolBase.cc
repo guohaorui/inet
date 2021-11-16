@@ -171,5 +171,62 @@ void MacProtocolBase::receiveSignal(cComponent *source, simsignal_t signalID, cO
     Enter_Method("%s", cComponent::getSignalName(signalID));
 }
 
+queueing::IPassivePacketSource *MacProtocolBase::getProvider(cGate *gate)
+{
+    return (gate->getId() == upperLayerInGateId) ? txQueue.get() : nullptr;
+}
+
+/**
+ * Notifies about a change in the possibility of pulling some packet from
+ * the passive packet source at the given gate.
+ *
+ * This method is called, for example, when a new packet is inserted into
+ * a queue. It allows the sink to pull a new packet from the queue.
+ *
+ * The gate parameter must be a valid gate of this module.
+ */
+void MacProtocolBase::handleCanPullPacketChanged(cGate *gate)
+{
+    Enter_Method("handleCanPullPacketChanged");
+    tryProcessUpperPackets();
+}
+
+/**
+ * Notifies about the completion of the packet processing for a packet that
+ * was pulled earlier independently whether the packet is passed or streamed.
+ *
+ * This method is called, for example, when a previously pulled packet is
+ * failed to be processed successfully. It allows the sink to retry the
+ * operation.
+ *
+ * The gate parameter must be a valid gate of this module. The packet must
+ * not be nullptr.
+ */
+void MacProtocolBase::handlePullPacketProcessed(Packet *packet, cGate *gate, bool successful)
+{
+    Enter_Method("handlePullPacketProcessed");
+    tryProcessUpperPackets();
+}
+
+bool MacProtocolBase::canProcessUpperPacket() const
+{
+    return (!currentTxFrame    // not an active transmission
+            && txQueue->canPullSomePacket(gate(upperLayerInGateId)->getPathStartGate())
+            );
+}
+
+void MacProtocolBase::processUpperPacket()
+{
+    auto packet = txQueue->pullPacket(gate(upperLayerInGateId)->getPathStartGate());
+    take(packet);
+    handleUpperPacket(packet);
+}
+
+void MacProtocolBase::tryProcessUpperPackets()
+{
+    while (canProcessUpperPacket())
+        processUpperPacket();
+}
+
 } // namespace inet
 
