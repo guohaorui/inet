@@ -57,10 +57,5 @@ module AckingMac extends MacProtocolBase like ILinkLayer, IMacProtocol
         @statistic[packetDropIncorrectlyReceived](title="packet drop: incorrectly received"; source=packetDropReasonIsIncorrectlyReceived(packetDropped); record=count,sum(packetBytes),vector(packetBytes); interpolationmode=none);
         @statistic[packetDropInterfaceDown](title="packet drop: interface down"; source=packetDropReasonIsInterfaceDown(packetDropped); record=count,sum(packetBytes),vector(packetBytes); interpolationmode=none);
         @statistic[packetDropNotAddressedToUs](title="packet drop: not addressed to us"; source=packetDropReasonIsNotAddressedToUs(packetDropped); record=count,sum(packetBytes),vector(packetBytes); interpolationmode=none);
-    submodules:
-        queue: <default("DropTailQueue")> like IPacketQueue {
-            parameters:
-                @display("p=100,100;q=l2queue");
-        }
 }
 

@@ -17,7 +17,6 @@
 
 package inet.linklayer.ethernet.basic;
 
-import inet.queueing.contract.IPacketQueue;
 import inet.linklayer.contract.IEtherMac;
 
 //
@@ -118,7 +117,7 @@ module EthernetMac like IEtherMac
 {
     parameters:
         string interfaceTableModule;        // The path to the InterfaceTable module
-        string displayStringTextFormat = default("rate: %b\nsent: %s, rcvd: %r\nqueue: %q, drop: %d");
+        string displayStringTextFormat = default("rate: %b\nsent: %s, rcvd: %r\ndrop: %d");
         bool sendRawBytes = default(false); // when true packets are serialized into a sequence of bytes before sending out
         bool promiscuous = default(false);  // if true, all packets are received, otherwise only the
                                             // ones with matching destination MAC address
@@ -162,11 +161,5 @@ module EthernetMac like IEtherMac
         input upperLayerIn @labels(EtherFrame);    // to ~EthernetEncapsulation or ~IMacRelayUnit
         output upperLayerOut @labels(EtherFrame);  // to ~EthernetEncapsulation or ~IMacRelayUnit
         inout phys @labels(EthernetSignal);        // to the network
-    submodules:
-        queue: <default("EthernetQueue")> like IPacketQueue {
-            parameters:
-                packetCapacity = default(1000);
-                @display("p=100,100");
-        }
 }
 

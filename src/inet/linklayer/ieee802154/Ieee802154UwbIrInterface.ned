@@ -37,6 +37,10 @@ module Ieee802154UwbIrInterface extends NetworkInterface like IWirelessInterface
         output upperLayerOut;
         input radioIn @labels(IWirelessSignal);
     submodules:
+        queue: <default("DropTailQueue")> like IPacketQueue {
+            parameters:
+                @display("p=100,100;q=l2queue");
+        }
         mac: AckingMac {
             parameters:
                 @display("p=300,100");
@@ -46,9 +50,10 @@ module Ieee802154UwbIrInterface extends NetworkInterface like IWirelessInterface
                 @display("p=300,200");
         }
     connections:
-        upperLayerIn --> { @display("m=n"); } --> mac.upperLayerIn;
+        upperLayerIn --> { @display("m=n"); } --> queue.in;
+        queue.out --> mac.upperLayerIn;
         mac.lowerLayerOut --> radio.upperLayerIn;
-        
+
         radioIn --> { @display("m=s"); } --> radio.radioIn;
         radio.upperLayerOut --> mac.lowerLayerIn;
         mac.upperLayerOut --> { @display("m=n"); } --> upperLayerOut;
