@@ -54,6 +54,7 @@ void MacProtocolBase::initialize(int stage)
         lowerLayerInGateId = findGate("lowerLayerIn");
         lowerLayerOutGateId = findGate("lowerLayerOut");
         hostModule = findContainingNode(this);
+        txQueue = getConnectedModule<queueing::IPacketQueue>(gate(upperLayerInGateId));
     }
     else if (stage == INITSTAGE_NETWORK_INTERFACE_CONFIGURATION)
         registerInterface();

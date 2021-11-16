@@ -32,6 +32,10 @@ void PacketFlowBase::initialize(int stage)
         consumer.reference(outputGate, false);
         provider.reference(inputGate, false);
         collector.reference(outputGate, false);
+        WATCH(producer);
+        WATCH(consumer);
+        WATCH(provider);
+        WATCH(collector);
     }
     else if (stage == INITSTAGE_QUEUEING) {
         checkPacketOperationSupport(inputGate);

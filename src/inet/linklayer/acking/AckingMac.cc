@@ -60,8 +60,6 @@ void AckingMac::initialize(int stage)
         radioModule->subscribe(IRadio::transmissionStateChangedSignal, this);
         radio = check_and_cast<IRadio *>(radioModule);
         transmissionState = IRadio::TRANSMISSION_STATE_UNDEFINED;
-
-        txQueue = check_and_cast<queueing::IPacketQueue *>(getSubmodule("queue"));
     }
     else if (stage == INITSTAGE_LINK_LAYER) {
         radio->setRadioMode(fullDuplex ? IRadio::RADIO_MODE_TRANSCEIVER : IRadio::RADIO_MODE_RECEIVER);

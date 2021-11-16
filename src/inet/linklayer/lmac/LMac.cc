@@ -54,8 +54,6 @@ void LMac::initialize(int stage)
         // how long does it take to send/receive a control packet
         controlDuration = (double)(b(headerLength).get() + numSlots + 16) / (double)bitrate; // FIXME replace 16 to a constant
         EV << "Control packets take : " << controlDuration << " seconds to transmit\n";
-
-        txQueue = check_and_cast<queueing::IPacketQueue *>(getSubmodule("queue"));
     }
     else if (stage == INITSTAGE_LINK_LAYER) {
         radio.reference(this, "radioModule", true);
