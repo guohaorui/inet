@@ -112,7 +112,7 @@ void Ieee802154Mac::initialize(int stage)
         rxAckTimer = new cMessage("timer-rxAck");
         macState = IDLE_1;
         txAttempts = 0;
-        txQueue = check_and_cast<queueing::IPacketQueue *>(getSubmodule("queue"));
+        txQueue = getConnectedModule<queueing::IPacketQueue>(gate(upperLayerInGateId));
         radio.reference(this, "radioModule", true);
     }
     else if (stage == INITSTAGE_LINK_LAYER) {

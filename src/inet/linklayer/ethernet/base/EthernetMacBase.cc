@@ -185,7 +185,7 @@ void EthernetMacBase::initialize(int stage)
         lowerLayerInGateId = physInGate->getId();
         lowerLayerOutGateId = physOutGate->getId();
         transmissionChannel = nullptr;
-        txQueue = check_and_cast<queueing::IPacketQueue *>(getSubmodule("queue"));
+        txQueue = getConnectedModule<queueing::IPacketQueue>(gate(upperLayerInGateId));
 
         initializeFlags();
 

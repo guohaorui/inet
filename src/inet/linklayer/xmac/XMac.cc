@@ -68,7 +68,7 @@ void XMac::initialize(int stage)
         lastDataPktSrcAddr = MacAddress::BROADCAST_ADDRESS;
 
         macState = INIT;
-        txQueue = check_and_cast<queueing::IPacketQueue *>(getSubmodule("queue"));
+        txQueue = getConnectedModule<queueing::IPacketQueue>(gate(upperLayerInGateId));
         WATCH(macState);
     }
     else if (stage == INITSTAGE_LINK_LAYER) {

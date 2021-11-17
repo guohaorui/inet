@@ -42,20 +42,20 @@ module WirelessInterface extends NetworkInterface like IWirelessInterface
     submodules:
         classifier: <default("OmittedIeee8021dQosClassifier")> like IIeee8021dQosClassifier {
             parameters:
-                @display("p=500,100");
+                @display("p=300,100");
         }
-        queue: <> like IPacketQueue {
+        queue: <default("DropTailQueue")> like IPacketQueue {
             parameters:
                 packetCapacity = default(10);
-                @display("p=100,100;q=l2queue");
+                @display("p=300,200;q=l2queue");
         }
         mac: <> like IMacProtocol {
             parameters:
-                @display("p=300,200");
+                @display("p=400,300");
         }
         radio: <default("")> like IRadio if typename != "" {
             parameters:
-                @display("p=300,300");
+                @display("p=400,400");
         }
     connections allowunconnected:
         upperLayerIn --> { @display("m=n"); } --> classifier.in;

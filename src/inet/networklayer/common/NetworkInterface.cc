@@ -174,7 +174,7 @@ void NetworkInterface::arrived(cMessage *message, cGate *gate, const SendOptions
 void NetworkInterface::pushPacket(Packet *packet, cGate *gate)
 {
     Enter_Method("pushPacket");
-    ASSERT(gate == upperLayerOut);
+//    ASSERT(gate == upperLayerOut);
     packet->addTagIfAbsent<InterfaceInd>()->setInterfaceId(interfaceId);
     consumer->pushPacket(packet, upperLayerOut->getPathEndGate());
 }

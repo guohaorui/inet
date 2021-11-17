@@ -84,7 +84,7 @@ void CsmaCaMac::initialize(int stage)
         mediumStateChange = new cMessage("MediumStateChange");
 
         // set up internal queue
-        txQueue = check_and_cast<queueing::IPacketQueue *>(getSubmodule("queue"));
+        txQueue = getConnectedModule<queueing::IPacketQueue>(gate(upperLayerInGateId));
 
         // state variables
         fsm.setName("CsmaCaMac State Machine");
