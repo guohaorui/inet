@@ -163,12 +163,12 @@ Let's see how we set up these flows. The UDP apps in the clients and servers are
    :end-at: *.client*.app[*].measurementStarter.typename = "FlowMeasurementStarter"
    :language: ini
 
-Here is the :ned:`FlowMeasurementStarter` in the UDP app:
+Here is the :ned:`FlowMeasurementStarter` in a client's UDP app:
 
-.. figure:: media/Default_UdpApp3.png
+.. figure:: media/Default_UdpApp4.png
    :align: center
 
-   Figure X. :ned:`FlowMeasurementStarter` in UDP app
+   Figure X. :ned:`FlowMeasurementStarter` in client UDP app
 
 Similarly, we enable the measurement recorder module in the server UDP apps (by setting their type to :ned:`FlowMeasurementRecorder`):
 
