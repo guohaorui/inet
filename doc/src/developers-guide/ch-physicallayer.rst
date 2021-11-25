@@ -400,6 +400,8 @@ following list provides some examples:
    determined by valid combinations of the radio mode, the transmitter
    state and the receiver state. To be used with energy generator and storage modules using `charge and current` (denoted with `Ep` in the module name).
 
+- TODO: StateBased Cc and Ep
+
 The energy consumer models are in the
 ``src/physicallayer/energyconsumer/`` directory.
 
