@@ -140,6 +140,7 @@ We want to measure the following:
 For this purpose, we specify five packet flows, and measure elapsed time and queueing time along the following flows:
 
 .. - Four packet flows going from each client's UDP app to the UDP app in the two servers (``client1`` -> ``server1``, ``client1`` -> ``server2``, ``client2`` -> ``server1``, ``client2`` -> ``server2``)
+
 - Four packet flows corresponding to the packet streams ``c1s1``, ``c1s2``, ``c2s1`` and ``c2s2`` (i.e. each flow is between the client and server UDP apps) 
 - A packet flow going between the Ethernet interfaces connecting ``switch1`` and ``switch2``.
 
@@ -192,8 +193,8 @@ For the packet flow between the two switches, we can enable the built-in ``measu
 Here is the complete flow definition configuration (including the definitions already mentioned):
 
 .. literalinclude:: ../omnetpp.ini
-   :start-at: *.client1.app[*].outbound.typename = "FlowMeasurementStarter"
-   :end-at: *.switch2.eth[2].measurementLayer.measurementRecorder.measure = "elapsedTime or queueingTime"
+   :start-at: *.client*.app[*].measurementStarter.typename
+   :end-at: *.switch2.eth[2].measurementLayer.measurementRecorder.measure
    :language: ini
 
 We set up the four flows between the clients and the servers, and also the flow between the two switches. We name flows based on source and destination node (e.g. ``c1s1`` for ``client1->server1``). We set the measurement modules to measure the elapsed time and the queueing time. Some notes:
