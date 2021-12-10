@@ -11,35 +11,172 @@ reliable time synchronization throughout the whole network.
 | INET version: ``4.4``
 | Source files location: `inet/showcases/tsn/timesynhronization/gptp <https://github.com/inet-framework/tree/master/showcases/tsn/timesynchronization/gptp>`__
 
+About gPTP
+----------
+
+.. so
+
+   gptp, compared to the out of bound clock sync, is a real protocol. the sync is an emergent property of the working of the protocol.
+
+   it works by measuring link delays and resident time of packets in the various network nodes, and uses that to sync clocks.
+   the protocol assign a role to each network node: master clock, slave clock, or bridge node -> nope
+
+   so
+
+   gptp works by
+
+   - measuring link delay
+   - propagating the time from the master clocks to the slave clocks (and the bridge clocks which are slaves in bridge nodes)
+   - so that the slave nodes know the time from the delay and the time sent by the master clock
+   - sync messages propagate the time
+   - delay request and response messages probe the link delay
+
+   so they periodically send req/resp messages to probe the link delay
+
+   the slaves and bridges periodically send 
+
+Overview
+~~~~~~~~
+
+The Generic Precision Time Protocol (gPTP) can synchronize clocks in a network with high accuracy required by TSN protocols.
+A network can have any number of gPTP time domains. Each domain contains a master clock, and any number of slave clocks.
+The protocol synchronizes the slave clocks to the master clock.
+
+In reality/according to the standard, the master clock can be automatically selected by the Best Master Clock algorithm (BCMA). BMCA also determines
+the clock spanning tree, i.e. the routes on which sync messages are propagated to slave clocks in the network. INET currently
+doesn't support BMCA, the master clock and the spanning tree needs to be specified manually.
+
+The operation of gPTP is summarized as follows:
+
+- All nodes compute the residence time and link latency
+- The gPTP sync messages are propagated along the spanning tree
+
+.. The protocol synchronizes slave clocks to a master clock. 
+
+
+.. **TODO** briefly how it works; master and slave clocks, etc.
+
+gPTP in INET
+~~~~~~~~~~~~
+
+In INET, the protocol is implemented by the :ned:`Gptp` module. The module is an application, and it is built in in several
+network nodes, such as hosts and ethernet switches. The built-in :ned:`Gptp` modules can be enabled with the :par:`hasTimeSynchronization`
+parameter in network nodes (this adds a :ned:`Gptp` module by default).
+
+Each gPTP node is one of three types:
+
+- **Master**: contains the master clock
+- **Bridge**: contains a slave clock, and forwards sync messages down the tree
+- **Slave**: contains a slave clock, and is a leaf in the tree
+
+The node type can be selected by the :ned:`Gptp` module's :par:`gptpNodeType` parameter (either ``MASTER_NODE``, ``BRIDGE_NODE`` or ``SLAVE_NODE``)
+
+The spanning tree is specified by labeling some of a node's ports as either master or slave, with the :par:`slavePort` and :par:`masterPorts` parameters (there is only one slave port). 
+Sync messages are received via the slave port, and forwarded via master ports.
+
+.. The protocol has two distinct mechanisms:
+
+  - Peer delay measurement: initiated by slave and bridge nodes up-tree by sending peer delay request messages (pDelayReq) and receiving peer delay responses (pDelayResp)
+  - Time synchronization: initiated by the master node by sending ``gptpSync`` messages down-tree; the messages are forwarded by bridge nodes to slave nodes
+
+  The INET implementation currently only features the two-step time synchronization process. The pDelayResp and gptpSync messages are immediatelly followed by a follow up message (pDelayFollowUp and gptpFollowUp), which contains the precise time of when the previous message
+  was sent. After receiving the follow up message, a node sets its clock time. (In the one-step process, the precise time is included in the original packet, so no follow-ups are necessary.)
+
+  **TODO** no BMC algorithm
+
+The :ned:`Gptp` has two distinct mechanisms:
+
+- peer delay measurement: slave and bridge nodes periodically measure link delay by sending peer delay request messages (pDelayReq) up-tree; 
+  they receive peer delay response messages (pDelayResp)
+- time synchronization: master nodes periodically broadcast gPTP sync messages with the correct time that propagate through-out the tree
+
+.. note:: - Currently, only two-step synchronization is supported, i.e. pDelayResp and gptpSync messages are immediatelly followed by follow-up 
+            messages which contain the precise time of sending the original pDelayResp/gptpSync message.
+          - Nodes can have multiple gPTP time domains. In this case, each time domain has a corresponding :ned:`Gptp` module. The :ned:`MultiGptp` module makes
+            this convenient, as it contains multiple :ned:`Gptp` modules. Also, each domain needs to have a corresponding clock module. The :ned:`MultiClock` module
+            can be used for this purpose.
+
+The period and offset of sync and peer delay measurement messages can be specified by parameters (:par:`syncInterval`, :par:`pDelayInterval`, 
+:par:`syncInitialOffset`, :par:`pDelayInitialOffset`).
+
+.. **TODO** multiple domains
+
+For more information on the parameters of the :ned:`Gptp` module, check the NED documentation.
+
+.. **what does it do/how does it work**
+
+   .. In reality, the master clock is selected by the Best Master Clock algorithm. This algorithm is not available in the INET gPTP
+      implementation, so the master clocks and the tree is selected manually.
+
+   **inet implementation**
+
+   - implemented as apps (sync modules)
+   - clocks and multiclocks
+   - parameters of gptp (some of them)
+
+   so
+
+   - two distinct mechanisms: peer delay measurement and time sync
+   - peer delay measurement: initiated by slave nodes and bridge nodes up-tree
+   - pDelayReq -> pDelayResp -> pDelayFollowUp
+   - time sync: initiated by master clock, forwarded down-tree by bridge nodes (its updated to use the bridge node's time)
+   - gptpSync -> gptpFollowUp
+
 The Model
 ---------
 
-Here is the ``General`` configuration:
+In this showcase, we demonstrate the setup and operation of gPTP in three simulations:
+
+- **One Master Clock**: Simple setup with one time domain and one master clock.
+- **Primary and Hot-Standby Master Clocks**: More complex setup with two time domains for a primary and a hot-standby master clock. If the primary master node goes offline,
+  the stand-by clock can continue time synchronization.
+- **Two Master Clocks Exploiting Network Redundancy**: Two master nodes with two master clocks each. Time synchronization is protected against the failure of any link in the network.
+
+.. Here is the ``General`` configuration:
+
+.. Here is part of the configuration shared by all three simulations:
+
+In the ``General`` configuration, we enable :ned:`Gptp` modules in all network nodes, and configure a random, constant clock drift for all clocks in the network.
 
 .. literalinclude:: ../omnetpp.ini
    :language: ini
    :end-before: OneMasterClock
 
+We detail each simulation in the following sections.
+
 One Master Clock
 ----------------
 
 In this configuration the network topology is a simple tree. The network contains
-one master clock, one bridge and two end stations:
+one master clock, one bridge and two end stations (:ned:`TsnDevice`), connected via
+an :ned:`EthernetSwitch`:
 
 .. figure:: media/OneMasterClockNetwork.png
    :align: center
 
-Here is the configuration:
+We configure the spanning tree by settings the master ports in ``tsnClock`` and ``tsnSwitch``:
+
+**TODO** the slave ports dont need to be set? -> no because its set by default in TsnSwitch (and TsnDevice and TsnClock)
+
+.. Here is the configuration:
 
 .. literalinclude:: ../omnetpp.ini
    :language: ini
    :start-at: OneMasterClock
-   :end-before: PrimaryAndHotStandbyMasterClocks
+   :end-at: tsnSwitch
 
-Here are the results for one master clock:
+.. note:: The slave ports are set to ``eth0`` by default in :ned:`TsnDevice` and :ned:`TsnSwitch`.
+
+**TODO** video
+
+.. Here are the results for one master clock:
+
+We examine clock drift of all clocks by plotting the clock time difference to simulation time:
 
 .. figure:: media/OneMasterClock.png
    :align: center
+
+The difference increases for the master clock, and the other clocks are periodically synchronized to that/to the master clock's time (so they keep drfiting together).
 
 Primary and Hot-Standby Master Clocks
 -------------------------------------
