@@ -16,6 +16,7 @@
 //
 
 #include "inet/clock/base/ClockBase.h"
+#include "inet/common/ModuleRefByPar.h"
 
 namespace inet {
 
@@ -26,6 +27,7 @@ void ClockBase::initialize(int stage)
     if (stage == INITSTAGE_LOCAL)
         displayStringTextFormat = par("displayStringTextFormat");
     else if (stage == INITSTAGE_LAST) {
+        referenceClockModule.reference(this, "referenceClock", false);
         updateDisplayString();
         emit(timeChangedSignal, getClockTime().asSimTime());
     }
@@ -103,6 +105,13 @@ const char *ClockBase::resolveDirective(char directive) const
             break;
         case 'T':
             result = getClockTime().ustr();
+            break;
+        case 'd':
+//        {
+//            auto diff = getClockTime() - referenceClockModule->getClockTime();
+//            result = diff.ustr();
+//        }
+            result = (getClockTime() - referenceClockModule->getClockTime()).ustr();
             break;
         default:
             throw cRuntimeError("Unknown directive: %c", directive);
