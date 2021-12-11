@@ -156,7 +156,7 @@ an :ned:`EthernetSwitch`:
 
 We configure the spanning tree by settings the master ports in ``tsnClock`` and ``tsnSwitch``:
 
-**TODO** the slave ports dont need to be set? -> no because its set by default in TsnSwitch (and TsnDevice and TsnClock)
+.. **TODO** the slave ports dont need to be set? -> no because its set by default in TsnSwitch (and TsnDevice and TsnClock)
 
 .. Here is the configuration:
 
