@@ -136,3 +136,28 @@ network TwoMasterClocksRingGptpShowcase extends TsnNetworkBase
         tsnSwitch6.ethg++ <--> EthernetLink <--> tsnDevice4.ethg++;
 }
 
+network X extends TsnNetworkBase
+{
+    parameters:
+            @display("bgb=1422,813");
+            int numSwitches = default(1);
+    submodules:
+        tsnClock: TsnClock {
+            @display("p=496,350");
+        }
+        tsnSwitch[numSwitches]: TsnSwitch {
+        }
+        tsnDevice1: TsnDevice {
+            @display("p=1231,457");
+        }
+        tsnDevice2: TsnDevice {
+            @display("p=1231,258");
+        }
+    connections:
+        tsnClock.ethg++ <--> EthernetLink <--> tsnSwitch[0].ethg++;
+        for i=0..(numSwitches-2) {
+            tsnSwitch[i].ethg++ <--> EthernetLink <--> tsnSwitch[i+1].ethg++;
+        }
+        tsnSwitch[numSwitches-1].ethg++ <--> EthernetLink <--> tsnDevice1.ethg++;
+        tsnSwitch[numSwitches-1].ethg++ <--> EthernetLink <--> tsnDevice2.ethg++;
+}

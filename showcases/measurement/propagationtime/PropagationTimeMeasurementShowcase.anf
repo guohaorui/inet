@@ -6,8 +6,7 @@
     </inputs>
     <charts>
         <chart icon="icons/full/obj/barchart.png" id="151" name="Packet propagation time on the channel" template="barchart_native" type="BAR">
-            <script>
-                <![CDATA[import math
+            <script><![CDATA[import math
 import numpy as np
 import pandas as pd
 from omnetpp.scave import results, chart, ideplot, utils
@@ -59,6 +58,7 @@ confidence_level_str = props["confidence_level"] if "confidence_level" in props 
 
 # pivoting and plotting
 df.sort_values(by=groups+series, axis='index', inplace=True)
+df['value'] = df['value'] * 1000000000
 if confidence_level_str == "none":
     df = pd.pivot_table(df, index=groups, columns=series, values='value')
     utils.plot_bars(df, props, names)
@@ -73,10 +73,8 @@ utils.postconfigure_plot(props)
 
 utils.export_image_if_needed(props)
 utils.export_data_if_needed(df, props)
-]]>
-            </script>
-            <dialogPage id="Input" label="Input">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></script>
+            <dialogPage id="Input" label="Input"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
   <import xmlns="http://sweet_swt.sf.net/xswt">
     <package name="java.lang" />
@@ -119,10 +117,8 @@ utils.export_data_if_needed(df, props)
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Bars" label="Bars">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Bars" label="Bars"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -174,10 +170,8 @@ utils.export_data_if_needed(df, props)
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Plot" label="Plot">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Plot" label="Plot"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -327,10 +321,8 @@ utils.export_data_if_needed(df, props)
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Styling" label="Styling">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Styling" label="Styling"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -440,10 +432,8 @@ utils.export_data_if_needed(df, props)
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Advanced" label="Advanced">
-                <![CDATA[<?xml version='1.0' encoding='UTF-8'?>
+]]></dialogPage>
+            <dialogPage id="Advanced" label="Advanced"><![CDATA[<?xml version='1.0' encoding='UTF-8'?>
 <xswt xmlns:x='http://sweet_swt.sf.net/xswt'>
   <import xmlns='http://sweet_swt.sf.net/xswt'>
     <package name='java.lang'/>
@@ -462,10 +452,8 @@ utils.export_data_if_needed(df, props)
     </styledText>
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
-            <dialogPage id="Export" label="Export">
-                <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+]]></dialogPage>
+            <dialogPage id="Export" label="Export"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <xswt xmlns:x="http://sweet_swt.sf.net/xswt">
 
   <import xmlns="http://sweet_swt.sf.net/xswt">
@@ -520,12 +508,11 @@ utils.export_data_if_needed(df, props)
 
   </x:children>
 </xswt>
-]]>
-            </dialogPage>
+]]></dialogPage>
             <property name="grid_show" value="true"/>
             <property name="legend_labels" value="result titles"/>
             <property name="Plot.Caching" value="true"/>
-            <property name="yaxis_title" value="propagation time [s]"/>
+            <property name="yaxis_title" value="propagation time [ns]"/>
             <property name="Legend.Border" value="false"/>
             <property name="title" value="Packet propagation time on the channel"/>
             <property name="Plot.Title.Font" value="Arial-regular-10"/>
@@ -542,14 +529,14 @@ utils.export_data_if_needed(df, props)
             <property name="Plot.BackgroundColor" value="white"/>
             <property name="xlabel_rotation" value="0"/>
             <property name="grid_density" value="Major"/>
-            <property name="groups" value=""/>
+            <property name="groups" value="module"/>
             <property name="yaxis_min" value=""/>
             <property name="Legend.Font" value="Arial-regular-8"/>
             <property name="baseline" value="0"/>
             <property name="image_export_filename" value="PropagationTime"/>
             <property name="filter" value="type =~ scalar AND isfield =~ false AND name =~ propagationTime"/>
             <property name="X.Label.Wrap" value="true"/>
-            <property name="series" value=""/>
+            <property name="series" value="configname"/>
             <property name="legend_show" value="true"/>
             <property name="simplify" value="false"/>
             <property name="yaxis_max" value=""/>
