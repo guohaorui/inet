@@ -199,17 +199,45 @@ Here is the configuration:
 .. literalinclude:: ../omnetpp.ini
    :language: ini
    :start-at: PrimaryAndHotStandbyMasterClocks
-   :end-before: TwoMasterClocksExploitingNetworkRedundancy
+   :end-at: clock[1].referenceClock = "tsnClock2.clock
 
-Here are the results for the primary and hot standby clocks:
+.. Here are the results for the primary and hot standby clocks:
 
-.. figure:: media/PrimaryAndHotStandby2.svg
+   .. figure:: media/PrimaryAndHotStandby2.svg
+      :align: center
+
+   Here is the clock time difference to simulation time plot (displaying the active clock in case there are multiple clocks in a node):
+
+   .. figure:: media/PrimaryAndHotStandby.png
+      :align: center
+
+Instead of plotting clock drift for all clocks in one chart, let's use three charts so they are easier to understand. Here is the 
+clock drift (clock time differencet to simulation time) of the two `master clocks`:
+
+.. figure:: media/PrimaryAndHotStandBy_masterclocks.png
    :align: center
 
-And here are the time domains of the primary and hot standby clocks:
+The two master clocks have a different drift rate, and the hot-standby master clock is periodically synchronized to the primary.
 
-.. figure:: media/TimeDomainsPrimaryAndHotStandby2.svg
+Here is the clock drift of all clocks in `time domain 0` (primary master):
+
+.. figure:: media/PrimaryAndHotStandBy_timedomain0.png
    :align: center
+
+The each clock has a different drift rate, but they are periodically synchronized to the primary master clock.
+
+Let's see the clock drift for all clocks in `time domain 1` (hot stand-by master):
+
+.. figure:: media/PrimaryAndHotStandBy_timedomain1.png
+   :align: center
+
+The clocks has different drift rates, and they are periodically synchronized to the hot stand-by master clock (which itself drifts from the primary master,
+and gets synchronized periodically; displayed with the think line).
+
+.. And here are the time domains of the primary and hot standby clocks:
+
+   .. figure:: media/TimeDomainsPrimaryAndHotStandby2.svg
+      :align: center
 
 Two Master Clocks Exploiting Network Redundancy
 -----------------------------------------------
