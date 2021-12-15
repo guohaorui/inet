@@ -39,17 +39,26 @@ Overview
 ~~~~~~~~
 
 The Generic Precision Time Protocol (gPTP) can synchronize clocks in a network with high accuracy required by TSN protocols.
-A network can have any number of gPTP time domains. Each domain contains a master clock, and any number of slave clocks.
-The protocol synchronizes the slave clocks to the master clock.
+A master clock's time is synchronized in a gPTP `time domain`. A network can have multiple gPTP time domains, i.e. nodes can keep track of time using multple clocks
+for redundancy (in case one of the master clocks fails or goes offline due to link break, for example). 
+Each time domain contains a master clock, and any number of slave clocks. The protocol synchronizes the slave clocks to the master clock by sending `sync messages`.
 
-In reality/according to the standard, the master clock can be automatically selected by the Best Master Clock algorithm (BCMA). BMCA also determines
+.. **TODO** types of ports, nodes, etc here?
+
+According to the IEEE 802.1AS standard, the master clock can be automatically selected by the Best Master Clock algorithm (BCMA). BMCA also determines
 the clock spanning tree, i.e. the routes on which sync messages are propagated to slave clocks in the network. INET currently
-doesn't support BMCA, the master clock and the spanning tree needs to be specified manually.
+doesn't support BMCA; the master clock and the spanning tree needs to be specified manually. (**TODO** each domain has its own spanning tree)
+
+.. gPTP nodes can be one of three types, according to their location in the spanning tree: master, bridge or slave node. Master nodes (containing the master clock for the time domain) create
+   gPTP sync messages, and broadcast them down-tree to bridge and slave nodes. Bridge nodes forward sync messages to slave nodes as well. **TODO** this seems to be INET specific?
+
+   **TODO** by specifying master and slave ports (interfaces)
 
 The operation of gPTP is summarized as follows:
 
-- All nodes compute the residence time and link latency
+- All nodes compute the residence time and up-tree link latency
 - The gPTP sync messages are propagated along the spanning tree
+- Nodes calculate the precise time from the sync messages, the residence time and the link latency (of the link the sync message was received from)
 
 .. The protocol synchronizes slave clocks to a master clock. 
 
@@ -69,10 +78,16 @@ Each gPTP node is one of three types:
 - **Bridge**: contains a slave clock, and forwards sync messages down the tree
 - **Slave**: contains a slave clock, and is a leaf in the tree
 
+gPTP nodes can be one of three types, according to their location in the spanning tree: `master`, `bridge` or `slave`. Master nodes (containing the master clock for the time domain) create
+gPTP sync messages, and broadcast them down-tree to bridge and slave nodes. Bridge nodes forward sync messages to slave nodes as well.
+
 The node type can be selected by the :ned:`Gptp` module's :par:`gptpNodeType` parameter (either ``MASTER_NODE``, ``BRIDGE_NODE`` or ``SLAVE_NODE``)
 
 The spanning tree is specified by labeling some of a node's ports as either master or slave, with the :par:`slavePort` and :par:`masterPorts` parameters (there is only one slave port). 
 Sync messages are received via the slave port, and forwarded via master ports.
+
+The spanning tree is created by labeling nodes' interfaces (called `ports`) as either a master or a slave, with the :par:`slavePort` and :par:`masterPorts` parameters.
+Sync messages are sent on master ports, and received on slave ports. (Master nodes only have master ports, and slave nodes only slave ports.)
 
 .. The protocol has two distinct mechanisms:
 
