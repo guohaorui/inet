@@ -107,10 +107,6 @@ const char *ClockBase::resolveDirective(char directive) const
             result = getClockTime().ustr();
             break;
         case 'd':
-//        {
-//            auto diff = getClockTime() - referenceClockModule->getClockTime();
-//            result = diff.ustr();
-//        }
             result = (getClockTime() - referenceClockModule->getClockTime()).ustr();
             break;
         default:
