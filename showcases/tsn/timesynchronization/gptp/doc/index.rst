@@ -107,7 +107,7 @@ The :ned:`Gptp` has two distinct mechanisms:
 
 .. note:: - Currently, only two-step synchronization is supported, i.e. pDelayResp and gptpSync messages are immediatelly followed by follow-up 
             messages which contain the precise time of sending the original pDelayResp/gptpSync message.
-          - Nodes can have multiple gPTP time domains. In this case, each time domain has a corresponding :ned:`Gptp` module. The :ned:`MultiGptp` module makes
+          - Nodes can have multiple gPTP time domains. In this case, each time domain has a corresponding :ned:`Gptp` module. The :ned:`MultiDomainGptp` module makes
             this convenient, as it contains multiple :ned:`Gptp` modules. Also, each domain needs to have a corresponding clock module. The :ned:`MultiClock` module
             can be used for this purpose.
 
@@ -198,23 +198,78 @@ Primary and Hot-Standby Master Clocks
 
 In this configuration the tree network topology is further extended. The network
 contains one primary master clock and one hot-standby master clock. Both master
-clocks have their own time synchronization domain and they do their synchronization
-separately. The only connection between the two is in the hot-standby master clock
-which is also synchronized to the primary master clock. This connection effectively
+clocks have their own time synchronization domain. The switch and device nodes have
+two clocks, each synchronizing to one of the master clocks separately. 
+The only connection between the two time domains is in the hot-standby master clock
+that is also synchronized to the primary master clock. This connection effectively
 causes the two time domains to be totally synchronized and allows seamless failover
 in the case of the master clock failure.
 
-Here is the network:
+.. note:: The master clock failure is demonstrated in the TODO showcase.
+
+.. Here is the network:
+
+The network contains two clock nodes (:ned:`TsnClock`) and four TSN device nodes (:ned:`TsnDevice`), connected by two TSN switches (:ned:`TsnSwitch`):
 
 .. figure:: media/PrimaryAndHotStandbyNetwork.png
    :align: center
 
 Here is the configuration:
 
+Our goal is to configure the two gPTP spanning trees for the two time domains as follows:
+
+- In domain 0, ``tsnClock1`` (the primary master) synchronizes to `all` other nodes.
+- In domain 1, ``tsnClock2`` (the hot stand-by master) synchronizes to all switches and devices.
+- The clock in ``tsnClock2`` gets synchronized to the primary master node in domain 0, and it synchronizes to all bridge and slave nodes in domain 1.
+
+In this setup, the clock nodes have one clock, and the others have two (one for each domain).
+
+Let's see the configuration in omnetpp.ini, starting with settings for the clock nodes:
+
 .. literalinclude:: ../omnetpp.ini
    :language: ini
    :start-at: PrimaryAndHotStandbyMasterClocks
-   :end-at: clock[1].referenceClock = "tsnClock2.clock
+   :end-at: *.tsnClock2.gptp.domain[1].masterPorts = ["eth0"]
+
+In this part, we configure ``tsnClock2`` to have a :ned:`SettableClock`, because we want to synchronize it (so we need to set the time).
+We configure ``tsnClock1`` to have a :ned:`Gptp` module, and set it as master node. Also, we specify that it should use its own clock,
+and set the only interface, ``eth0`` to be a master port (the node will send gPTP sync messages on that port).
+
+In tsnClock2, we need two gptp domains, so we set the type of the ``gptp`` module to :ned:`MultiDomainGptp` with two domains. 
+Both domains use the one clock in the node, but one of them acts as a gptp master, the other one a gptp slave (using the same port, eth0).
+
+Here is the configuration for the switches:
+
+.. literalinclude:: ../omnetpp.ini
+   :language: ini
+   :start-at: *.tsnSwitch*.clock.typename = "MultiClock"
+   :end-at: *.tsnSwitch2.gptp.domain[1].masterPorts = ["eth1", "eth2", "eth3"]
+
+We configure the switches to have two clocks and two :ned:`Gptp` modules (one for each domain). We then specify the spanning tree by setting
+the ports (the :par:`gptpModuleType` is ``BRIDGE_NODE`` by default in :ned:`TsnSwitch`, so we don't need to specify that).
+In both domains, the interface connecting to the clock node is the slave port, and the others are master ports. The only exception is
+that tsnSwitch1 shouldn't send sync messages to tsnClock1 (as we don't want getting synchronized to anything), so the eth1 interface isn't set as a master port.
+
+Finally, here is the configuration for the devices:
+
+.. literalinclude:: ../omnetpp.ini
+   :language: ini
+   :start-at: *.tsnDevice*.clock.typename = "MultiClock"
+   :end-at: *.tsnDevice*.gptp.domain[*].slavePort = "eth0"
+
+Just as in the switches, we need two clocks and two :ned:`Gptp` modules in the devices as well, so we use MultiClock and MultiDomainGptp with 2 submodules.
+We configure each device's Gptp module to use the local clock (the subclock for the appropriate domain is automatically selected **TODO**).
+We set all Gptp modules to use the only interface as the slave port (the Gptp module type is ``SLAVE_NODE`` by default in :ned:`TsnDevice`, so we don't need
+to set that).
+
+Also, we configure some offsets for the pDelay measurement and gPTP sync messages, so they are not concurrent:
+
+.. literalinclude:: ../omnetpp.ini
+   :language: ini
+   :start-at: pdelayInitialOffset
+   :end-at: domain[1].syncInitialOffset
+
+.. .. note:: Some parts of the configuration not relevant to gPTP are omitted from this text, e.g. visualization **TODO** this might not be needed
 
 .. Here are the results for the primary and hot standby clocks:
 
@@ -226,7 +281,13 @@ Here is the configuration:
    .. figure:: media/PrimaryAndHotStandby.png
       :align: center
 
-Instead of plotting clock drift for all clocks in one chart, let's use three charts so they are easier to understand. Here is the 
+Here is a video of the simulation running in Qtenv (the clock time in master nodes, and the time difference to this clock time in the other nodes are displayed for each clock):
+
+First, the bridge and slave nodes measure link delay by exchanging pDelay messages. Note that the clocks are set to the new time after the gptp followup messages are received.
+This setup is protected against the failure of the master clock. In that case, the nodes in the network would (could?) switch to gptp domain 1: the active clock in MultiClock would switch 
+to clock[1], without affecting timings.
+
+Let's examine some clock drift charts. Instead of plotting clock drift for all clocks in one chart, let's use three charts so they are easier to understand. Here is the 
 clock drift (clock time differencet to simulation time) of the two `master clocks`:
 
 .. figure:: media/PrimaryAndHotStandBy_masterclocks.png
@@ -254,27 +315,57 @@ and gets synchronized periodically; displayed with the think line).
    .. figure:: media/TimeDomainsPrimaryAndHotStandby2.svg
       :align: center
 
+In the next section, we make the network more redundant, so that the primary master clock `and` any link in the network can fail
+without ruining timings.
+
 Two Master Clocks Exploiting Network Redundancy
 -----------------------------------------------
 
-In this configuration the network topology is a ring. Each of the primary master
-clock and the hot-standby master clock has two separate time domains. One time
+In this configuration the network topology is a ring. The primary master
+clock and the hot-standby master clock each have two separate time domains. One time
 domain uses the clockwise and another one uses the counter-clockwise direction
 in the ring topology to disseminate the clock time in the network. This approach
-provides protection against a single link failure in the ring topology because
-all bridges can be reached in both directions by one of the time synchronization
+provides protection against the failure of the primary master node `and` a single link failure 
+in the ring topology because all bridges can be reached in both directions by one of the time synchronization
 domains of both master clocks.
 
-Here is the network:
+Here is the network (it uses the same node types as the previous ones, :ned:`tsnClock`, :ned:`tsnSwitch` and :ned:`tsnDevice`):
 
 .. figure:: media/TwoMasterClocksNetwork.png
    :align: center
 
-Here is the configuration:
+Our goal is to protect against the failure of the primary master node, so we need a hot stand-by master node,
+just as in the previous example. Additionally, we want the network to be protected against any link failing
+in the ring, between any of the switches. To this end, the two master nodes are configured to have two gPTP time domains,
+each sending sync messages in a different direction in the ring. Thus if any link fails in the ring, the sync information
+can reach all switches and devices in the other direction.
+
+The two time domains of the hot stand-by master node (``tsnClock2``) are synchronized to the two time domains of the primary master node (``tsnClock1``).
+Thus the clock nodes have two time domains (two clocks and two :ned:`Gptp` modules), the switches and devices have four.
+In case of failure of the primary master node and a link in the ring, the switches and devices would have at least one synchronized clock
+they could switch over to.
+
+Here is the configuration for the clock nodes:
 
 .. literalinclude:: ../omnetpp.ini
    :language: ini
    :start-at: TwoMasterClocksExploitingNetworkRedundancy
+   :end-at: *.tsnClock2.gptp.domain[3].masterPorts = ["eth0"]
+
+.. literalinclude:: ../omnetpp.ini
+   :language: ini
+   :start-after: *.tsnClock2.gptp.domain[3].masterPorts = ["eth0"]
+   :end-at: *.tsnSwitch6.gptp.domain[3].slavePort = "eth1"
+
+.. literalinclude:: ../omnetpp.ini
+   :language: ini
+   :start-at: *.tsnDevice*.clock.typename = "MultiClock"
+   :end-at: *.tsnDevice*.gptp.domain[*].slavePort = "eth0"
+
+.. literalinclude:: ../omnetpp.ini
+   :language: ini
+   :start-at: **.pdelayInitialOffset = 0.1ms
+   :end-at: *.*.gptp.domain[3].syncInitialOffset = syncInterval * 4 / 4
 
 Here are the results for two master clocks:
 
