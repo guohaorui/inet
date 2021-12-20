@@ -345,6 +345,14 @@ Thus the clock nodes have two time domains (two clocks and two :ned:`Gptp` modul
 In case of failure of the primary master node and a link in the ring, the switches and devices would have at least one synchronized clock
 they could switch over to.
 
+There are four gptp domains in the network, two for each clock node. A clock node uses one domain to disseminate timing information
+in the ring clockwise, the other counter-clockwise.
+
+The two domains of tsnClock1 sync to two clocks in tsnClock2. Thus tsnClock2 has the correct timing information received independently from the two directions.
+The gptp domains of tsnClock2 (domain2 and 3) disseminate the timing information of the active clock in tsnClock's MultiClock module (that is clock[0]), in two
+directions as well. Thus bridge and slave nodes (switches and devices) have four clock and four domains, each containing time synced to the master clock in tsnClock1.
+In each node, the first clock is the active one (clock[0]); however, in case of link failure, the nodes can switch to another active clock which contains the correct time.
+
 Here is the configuration for the clock nodes:
 
 .. literalinclude:: ../omnetpp.ini
