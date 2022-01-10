@@ -39,9 +39,9 @@ Overview
 ~~~~~~~~
 
 The Generic Precision Time Protocol (gPTP) can synchronize clocks in a network with high accuracy required by TSN protocols.
-A master clock's time is synchronized in a gPTP `time domain`. A network can have multiple gPTP time domains, i.e. nodes can keep track of time using multple clocks
+A master clock's time is synchronized to slave clocks within a gPTP `time domain`. A network can have multiple gPTP time domains, i.e. nodes can keep track of time using multple clocks
 for redundancy (in case one of the master clocks fails or goes offline due to link break, for example). 
-Each time domain contains a master clock, and any number of slave clocks. The protocol synchronizes the slave clocks to the master clock by sending `sync messages`.
+Each time domain contains one master clock, and any number of slave clocks. The protocol synchronizes the slave clocks to the master clock by sending `sync messages`.
 
 .. **TODO** types of ports, nodes, etc here?
 
