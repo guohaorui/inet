@@ -225,7 +225,10 @@ bool MacAddressTable::updateMacAddressTable(int interfaceId, const MacAddress& a
         for (auto id : entry.interfaceIds)
             if (id == interfaceId)
                 return true;
-        entry.interfaceIds.push_back(interfaceId);
+        if (address.isMulticast())
+            entry.interfaceIds.push_back(interfaceId);
+        else
+            entry.interfaceIds[0] = interfaceId;
     }
     return true;
 }
