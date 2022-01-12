@@ -68,7 +68,12 @@ class INET_API SctpHeader : public SctpHeader_Base
     /**
      * Adds a message object to the SCTP packet. The packet length will be adjusted
      */
+#if (OMNETPP_BUILDNUM >= 1530)
+    virtual void appendSctpChunks(SctpChunk *sctpChunks) override;
+    using SctpHeader_Base::insertSctpChunks;
+#else
     virtual void insertSctpChunks(SctpChunk *sctpChunks) override;
+#endif
     virtual void insertSctpChunks(size_t k, SctpChunk *sctpChunks) override;
     virtual void eraseSctpChunks(size_t k) override {}
     virtual void replaceSctpChunk(SctpChunk *msg, uint32_t k);
@@ -110,7 +115,12 @@ class INET_API SctpErrorChunk : public SctpErrorChunk_Base
     /** Generated but unused method, should not be called. */
     virtual void setParameters(size_t k, SctpParameter *parameters) override;
 
+#if (OMNETPP_BUILDNUM >= 1530)
+    virtual void appendParameters(SctpParameter *parameters) override {}
+    using SctpErrorChunk_Base::insertParameters;
+#else
     virtual void insertParameters(SctpParameter *parameters) override {}
+#endif
     virtual void insertParameters(size_t k, SctpParameter *parameters) override {}
     virtual void eraseParameters(size_t k) override {}
     /**
@@ -153,7 +163,12 @@ class INET_API SctpStreamResetChunk : public SctpStreamResetChunk_Base
     /** Generated but unused method, should not be called. */
     virtual void setParameters(size_t k, SctpParameter *parameters) override;
 
+#if (OMNETPP_BUILDNUM >= 1530)
+    virtual void appendParameters(SctpParameter *parameters) override {}
+    using SctpStreamResetChunk_Base::insertParameters;
+#else
     virtual void insertParameters(SctpParameter *parameters) override {}
+#endif
     virtual void insertParameters(size_t k, SctpParameter *parameters) override {}
     virtual void eraseParameters(size_t k) override {}
     /**
@@ -195,7 +210,12 @@ class INET_API SctpAsconfChunk : public SctpAsconfChunk_Base
     /** Generated but unused method, should not be called. */
     virtual void setAsconfParams(size_t k, SctpParameter *asconfParams) override;
 
+#if (OMNETPP_BUILDNUM >= 1530)
+    virtual void appendAsconfParams(SctpParameter *asconfParams) override {}
+    using SctpAsconfChunk_Base::insertAsconfParams;
+#else
     virtual void insertAsconfParams(SctpParameter *asconfParams) override {}
+#endif
     virtual void insertAsconfParams(size_t k, SctpParameter *asconfParams) override {}
     virtual void eraseAsconfParams(size_t k) override {}
 
@@ -239,7 +259,12 @@ class INET_API SctpAsconfAckChunk : public SctpAsconfAckChunk_Base
     /** Generated but unused method, should not be called. */
     virtual void setAsconfResponse(size_t k, SctpParameter *asconfResponse) override;
 
+#if (OMNETPP_BUILDNUM >= 1530)
+    virtual void appendAsconfResponse(SctpParameter *asconfResponse) override {}
+    using SctpAsconfAckChunk_Base::insertAsconfResponse;
+#else
     virtual void insertAsconfResponse(SctpParameter *asconfResponse) override {}
+#endif
     virtual void insertAsconfResponse(size_t k, SctpParameter *asconfResponse) override {}
     virtual void eraseAsconfResponse(size_t k) override {}
 

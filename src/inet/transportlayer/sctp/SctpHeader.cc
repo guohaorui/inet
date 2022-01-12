@@ -103,7 +103,11 @@ void SctpHeader::replaceSctpChunk(SctpChunk *chunk, uint32_t k)
     setSctpChunks(k, chunk);
 }
 
+#if (OMNETPP_BUILDNUM >= 1530)
+void SctpHeader::appendSctpChunks(SctpChunk *chunk)
+#else
 void SctpHeader::insertSctpChunks(SctpChunk *chunk)
+#endif
 {
     handleChange();
     sctpChunkList.push_back(chunk);
