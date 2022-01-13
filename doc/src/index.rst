@@ -14,7 +14,7 @@ Table of Contents
    users-guide/index
    developers-guide/index
    migration-guide/index
-   NED Reference <https://omnetpp.org/doc/inet/api-current/neddoc/>
+   NED Reference <http://omnest.com/tmp/tsn/neddoc/index.html>
    ← Back to the INET Site <https://inet.omnetpp.org>
 
 .. raw:: html

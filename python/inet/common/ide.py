@@ -1,9 +1,10 @@
 import logging
+import os
 from py4j.clientserver import JavaParameters, PythonParameters, ClientServer
 
 logger = logging.getLogger(__name__)
 
-cs = ClientServer(java_parameters=JavaParameters(port=3071+653, auto_field=True, auto_convert=True, auto_close=True),
+cs = ClientServer(java_parameters=JavaParameters(auth_token=os.environ["AUTH_TOKEN"], port=3071+653, auto_field=True, auto_convert=True, auto_close=True),
                   python_parameters=PythonParameters(port=0, daemonize=True, daemonize_connections=True),
                   python_server_entry_point=None)
 org = cs.jvm.org

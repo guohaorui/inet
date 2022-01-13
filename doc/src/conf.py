@@ -242,7 +242,7 @@ images_config = {
 
 doxylink = {
 #        'cpp' : ('doxytags.xml', 'https://doc.omnetpp.org/inet/api-current/doxy/'),
-        'ned' : ('nedtags.xml', 'https://doc.omnetpp.org/inet/api-current/neddoc/'),
+        'ned' : ('nedtags.xml', 'neddoc/'),
         'msg' : ('msgtags.xml', 'https://doc.omnetpp.org/inet/api-current/neddoc/'),
 }
 
